@@ -7,7 +7,7 @@ import './Landing.css';
 function Landing() {
 
   return (
-    <>
+    <div className='LandingPage'>
       <div className='LandingHeader'>
 
       </div>
@@ -35,7 +35,7 @@ function Landing() {
       <div className='LandingFooter'>
 
       </div>
-    </>
+    </div>
   );
 }
 

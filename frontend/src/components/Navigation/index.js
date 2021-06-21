@@ -28,6 +28,11 @@ function Navigation({ isLoaded }){
   return (
     <div className='NavigationContainer'>
       <NavLink exact to="/">{d20}</NavLink>
+      <div className='NavigationSearchBar'>
+        <input>
+          
+        </input>
+      </div>
       {isLoaded && sessionLinks}
     </div>
   );
