@@ -1,39 +1,27 @@
-import React, { useState } from 'react';
-import * as sessionActions from '../../store/session';
-import { useDispatch, useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFacebookSquare, faGooglePlusSquare, faTwitterSquare } from '@fortawesome/free-brands-svg-icons'
-import { faUser, faKey } from '@fortawesome/free-solid-svg-icons';
+// frontend/src/components/LoginFormModal/LoginForm.js
+import React, { useState } from "react";
+import * as sessionActions from "../../store/session";
+import { useDispatch } from "react-redux";
+import { fbSquare, gpSquare, twSquare, userIcon, keyIcon } from '../icons';
 import './LoginForm.css';
 
 
-function LoginFormPage() {
+function LoginForm() {
   const dispatch = useDispatch();
-  const sessionUser = useSelector(state => state.session.user);
-  const [credential, setCredential] = useState('');
-  const [password, setPassword] = useState('');
+  const [credential, setCredential] = useState("");
+  const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
-
-  if (sessionUser) return (
-    <Redirect to="/" />
-  );
-
-  const fbSquare = <FontAwesomeIcon icon={ faFacebookSquare } />
-  const gpSquare = <FontAwesomeIcon icon={ faGooglePlusSquare } />
-  const twSquare = <FontAwesomeIcon icon={ faTwitterSquare } />
-  const userIcon = <FontAwesomeIcon icon={ faUser } />
-  const keyIcon = <FontAwesomeIcon icon={ faKey } />
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
-    return dispatch(sessionActions.login({ credential, password }))
-      .catch(async (res) => {
+    return dispatch(sessionActions.login({ credential, password })).catch(
+      async (res) => {
         const data = await res.json();
         if (data && data.errors) setErrors(data.errors);
-      });
-  }
+      }
+    );
+  };
 
   return (
     <div className='LoginFormContainer'>
@@ -85,4 +73,4 @@ function LoginFormPage() {
   );
 }
 
-export default LoginFormPage;
+export default LoginForm;
