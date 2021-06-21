@@ -1,0 +1,83 @@
+.LoginFormContainer {
+  background-color: grey;
+  color: white;
+  width: 300px;
+  margin: 200px auto;
+  border: 2px solid black;
+  border-radius: 10px;
+}
+
+.LoginFormErrors {
+  width: 60%;
+  margin: 10px auto;
+  list-style-type: none;
+  color: darkred;
+}
+
+.LoginFormTitle {
+  margin: 20px 20px;
+  font-size: 2.5em;
+}
+
+.LoginForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.LoginFormUsernameLabel, .LoginFormPasswordLabel {
+  padding: 5px;
+  width: 90%;
+  margin: 10px auto;
+  display: flex;
+  border-radius: 5px;
+  background-color: darkgrey;
+}
+
+.LoginFormInputIcon {
+  font-size: large;
+  width: 15%;
+  height: fill;
+}
+
+.LoginFormUsernameInput, .LoginFormPasswordInput {
+  width: 100%
+}
+
+.LoginFormSubmitButton {
+  width: 90%;
+  height: 50px;
+  font-size: 2em;
+  border-radius: 8px;
+  margin: 10px auto;
+  background-color: darkgrey;
+  color: white;
+  border: 2px solid darkgrey;
+}
+
+.LoginFormSubmitButton:hover {
+  transition: all 0.4s ease 0s;
+  background-color: grey;
+  cursor: pointer;
+}
+
+.LoginFormSignup {
+  width: 90%;
+  margin: 10px auto;
+}
+
+.LoginFormSignup > a {
+  color: darkblue;
+  text-decoration: none;
+}
+
+.LoginFormSignup > a:hover {
+  text-decoration: underline;
+}
+
+.LoginFormIcons {
+  font-size: 3em;
+  display: flex;
+  justify-content: space-around;
+  width: 75%;
+  margin: 20px auto;
+}
