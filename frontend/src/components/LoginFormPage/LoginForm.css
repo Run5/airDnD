@@ -81,3 +81,9 @@
   width: 75%;
   margin: 20px auto;
 }
+
+.LoginFormIcon:hover {
+  transition: all 0.4s ease 0s;
+  color: darkgrey;
+  cursor: pointer;
+}

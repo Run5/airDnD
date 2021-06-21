@@ -77,9 +77,9 @@ function LoginFormPage() {
         <a href=''>Sign Up</a>
       </div>
       <div className='LoginFormIcons'>
-        {fbSquare}
-        {gpSquare}
-        {twSquare}
+        <div className='LoginFormIcon'>{fbSquare}</div>
+        <div className='LoginFormIcon'>{gpSquare}</div>
+        <div className='LoginFormIcon'>{twSquare}</div>
       </div>
     </div>
   );
