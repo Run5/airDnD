@@ -58,11 +58,11 @@ function LoginForm() {
             placeholder='password'
           />
         </label>
-        <button type="submit" className='LoginFormSubmitButton'>Login</button>
+        <button type="submit" className='LoginFormSubmitButton'>Log In</button>
       </form>
       <div className='LoginFormSignup'>
         Don't have an account?&ensp;
-        <a href=''>Sign Up</a>
+        <a>Sign Up</a>
       </div>
       <div className='LoginFormIcons'>
         <div className='LoginFormIcon'>{fbSquare}</div>

@@ -1,4 +1,4 @@
-.LoginFormContainer {
+.SignupFormContainer {
   background-color: grey;
   color: white;
   width: 300px;
@@ -7,25 +7,27 @@
   border-radius: 10px;
 }
 
-.LoginFormErrors {
+.SignupFormErrors {
   width: 60%;
   margin: 10px auto;
   list-style-type: none;
   color: darkred;
 }
 
-.LoginFormTitle {
+.SignupFormTitle {
   margin: 20px 20px;
   font-size: 2.5em;
 }
 
-.LoginForm {
+.SignupForm {
   display: flex;
   flex-direction: column;
 }
 
-.LoginFormUsernameLabel,
-.LoginFormPasswordLabel {
+.SignupFormUsernameLabel,
+.SignupFormPasswordLabel,
+.SignupFormEmailLabel,
+.SignupFormConfirmPasswordLabel {
   padding: 5px;
   width: 90%;
   margin: 10px auto;
@@ -34,18 +36,20 @@
   background-color: darkgrey;
 }
 
-.LoginFormInputIcon {
+.SignupFormInputIcon {
   font-size: large;
   width: 15%;
   height: fill;
 }
 
-.LoginFormUsernameInput,
-.LoginFormPasswordInput {
+.SignupFormUsernameInput,
+.SignupFormPasswordInput,
+.SignupFormEmailInput,
+.SignupFormConfirmPasswordInput {
   width: 100%
 }
 
-.LoginFormSubmitButton {
+.SignupFormSubmitButton {
   width: 90%;
   height: 50px;
   font-size: 2em;
@@ -56,28 +60,28 @@
   border: 2px solid darkgrey;
 }
 
-.LoginFormSubmitButton:hover {
+.SignupFormSubmitButton:hover {
   transition: all 0.4s ease 0s;
   background-color: grey;
   cursor: pointer;
 }
 
-.LoginFormSignup {
+.SignupFormSignup {
   width: 90%;
   margin: 10px auto;
 }
 
-.LoginFormSignup > a {
+.SignupFormSignup > a {
   color: darkblue;
   text-decoration: none;
 }
 
-.LoginFormSignup > a:hover {
+.SignupFormSignup > a:hover {
   text-decoration: underline;
   cursor: pointer;
 }
 
-.LoginFormIcons {
+.SignupFormIcons {
   font-size: 3em;
   display: flex;
   justify-content: space-around;
@@ -85,7 +89,7 @@
   margin: 20px auto;
 }
 
-.LoginFormIcon:hover {
+.SignupFormIcon:hover {
   transition: all 0.4s ease 0s;
   color: darkgrey;
   cursor: pointer;
