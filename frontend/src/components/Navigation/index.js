@@ -59,18 +59,18 @@ function Navigation({ isLoaded }){
         <div className='NavSearch'>
           Start your search
         </div>
-        <button type='button' class='NavSearchButton'>
+        <button type='button' className='NavSearchButton'>
           {searchIcon}
         </button>
       </div>
       <div className='NavRightContainer'>
         <div className='NavBecomeHost'>
-          <button type='button' class='NavHostButton'>
+          <button type='button' className='NavHostButton'>
             Become a host
           </button>
         </div>
         <div className='NavLoginSignup'>
-          <button type='button' class='NavProfileButton' onClick={openMenu}>
+          <button type='button' className='NavProfileButton' onClick={openMenu}>
             {barsIcon}&ensp;{userIcon}
           </button>
           {isLoaded ? (showMenu && (
