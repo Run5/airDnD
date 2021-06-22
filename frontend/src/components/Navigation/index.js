@@ -21,12 +21,21 @@ function Navigation({ isLoaded }){
 
   useEffect(() => {
     if (!showMenu) return;
+    console.log('menu should be shown here')
 
     const closeMenu = () => {
       setShowMenu(false);
     };
 
-    // document.addEventListener('click', closeMenu);
+    const menu = document.querySelector('.profile-dropdown');
+
+    document.addEventListener('click', (e) => {
+      console.log(e.target, menu)
+      if(e.target !== menu) {
+        closeMenu();
+        //document.removeEventListener("click", closeMenu);
+      }
+    });
 
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
@@ -38,15 +47,22 @@ function Navigation({ isLoaded }){
 
   let sessionLinks;
   if (sessionUser) {
+
     sessionLinks = (
-      <ProfileButton user={sessionUser} />
+      <ul className="profile-dropdown">
+        <li>{sessionUser.username}</li>
+        <li>{sessionUser.email}</li>
+        <li>
+          <button onClick={logout}>Log Out</button>
+        </li>
+      </ul>
     );
   } else {
     sessionLinks = (
-      <>
-        <LoginFormModal />
-        <SignupFormModal />
-      </>
+      <ul className="profile-dropdown">
+        <li><LoginFormModal /></li>
+        <li><SignupFormModal /></li>
+      </ul>
     );
   }
 
@@ -73,10 +89,12 @@ function Navigation({ isLoaded }){
           <button type='button' className='NavProfileButton' onClick={openMenu}>
             {barsIcon}&ensp;{userIcon}
           </button>
-          {isLoaded ? (showMenu && (
+          { isLoaded && (showMenu && sessionLinks)}
+          {/* {isLoaded ? (showMenu && (
             <ul className="profile-dropdown">
               <li><LoginFormModal /></li>
               <li><SignupFormModal /></li>
+              <li><button onClick={logout}>Log Out</button></li>
             </ul>
           )) : (showMenu && (
             <ul className="profile-dropdown">
@@ -86,7 +104,7 @@ function Navigation({ isLoaded }){
                 <button onClick={logout}>Log Out</button>
               </li>
             </ul>
-          ))}
+          ))} */}
         </div>
       </div>
     </div>

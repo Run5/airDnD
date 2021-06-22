@@ -12,7 +12,9 @@
 
 .NavHome {
   font-size: 30px;
-  margin: auto 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 100px;
 }
 
 .NavHome > a{
@@ -68,7 +70,9 @@
 }
 
 .NavProfileButton {
-  margin: auto 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: 100px;
   background: none;
   color: white;
   border: 1px solid white;
@@ -84,4 +88,5 @@
 .profile-dropdown {
   position: absolute;
   z-index: 1;
+  background-color: burlywood;
 }
