@@ -9,7 +9,19 @@ function Landing() {
   return (
     <div className='LandingPage'>
       <div className='LandingHeader'>
-
+        <div className='LandingBannerContainer'>
+          <div className='LandingBanner'>
+            <div className='LandingBannerTitle'>
+              The Greatest Adventure
+            </div>
+            <div className='LandingBannerSubtitle'>
+              Wishlists curated by Airdnd.
+            </div>
+            <button className='LandingBannerButton'>
+              Get inspired
+            </button>
+          </div>
+        </div>
       </div>
       <div className='LandingExploreNearby'>
 

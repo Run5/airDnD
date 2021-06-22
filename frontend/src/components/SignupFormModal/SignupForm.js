@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
-import { fbSquare, gpSquare, twSquare, userIcon, keyIcon, emailSquare, lockIcon } from '../icons';
+import { fbSquare, gpSquare, twSquare, userIcon, keyIcon, emailSquare, lockIcon, errIcon } from '../icons';
 import './SignupForm.css';
 
 function SignupFormModal() {
@@ -36,7 +36,7 @@ function SignupFormModal() {
         Register
       </h3>
       <form className='SignupForm' onSubmit={handleSubmit}>
-        { (errors.length > 0) ? <ul className='SignupFormErrors'>{errors.map((error, idx) => <li key={idx}>{error}</li>)}</ul> : null }
+        { (errors.length > 0) ? <ul className='SignupFormErrors'>{errors.map((error, idx) => <li key={idx}>{errIcon} {error}</li>)}</ul> : null }
         <label className='SignupFormEmailLabel'>
           <div className='SignupFormInputIcon'>
             {/* Email */}

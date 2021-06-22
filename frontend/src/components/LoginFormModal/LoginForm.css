@@ -1,17 +1,20 @@
+@import "../styles.css";
+
 .LoginFormContainer {
-  background-color: grey;
+  background-color: var(--lightBlue);
   color: white;
   width: 300px;
   margin: 200px auto;
-  border: 2px solid black;
+  border: 2px solid var(--darkBlue);
   border-radius: 10px;
 }
 
 .LoginFormErrors {
-  width: 60%;
+  width: 90%;
   margin: 10px auto;
   list-style-type: none;
   color: darkred;
+  padding-left: 0;
 }
 
 .LoginFormTitle {
@@ -31,7 +34,7 @@
   margin: 10px auto;
   display: flex;
   border-radius: 5px;
-  background-color: darkgrey;
+  background-color: var(--greyBlue);
 }
 
 .LoginFormInputIcon {
@@ -51,14 +54,14 @@
   font-size: 2em;
   border-radius: 8px;
   margin: 10px auto;
-  background-color: darkgrey;
+  background-color: var(--greyBlue);
   color: white;
-  border: 2px solid darkgrey;
+  border: 2px solid var(--greyBlue);
 }
 
 .LoginFormSubmitButton:hover {
   transition: all 0.4s ease 0s;
-  background-color: grey;
+  background-color: var(--brightBlue);
   cursor: pointer;
 }
 
@@ -68,7 +71,7 @@
 }
 
 .LoginFormSignup > a {
-  color: darkblue;
+  color: var(--darkBlue);
   text-decoration: none;
 }
 
@@ -87,6 +90,6 @@
 
 .LoginFormIcon:hover {
   transition: all 0.4s ease 0s;
-  color: darkgrey;
+  color: var(--greyBlue);
   cursor: pointer;
 }

@@ -1,0 +1,16 @@
+:root {
+  --darkBlue: #1c2430;
+  --lightGrey: #bbc3c9;
+  --blue: #55667e;
+  --lightBlue: #8ba2b7;
+  --brightBlue: #758ea7;
+  --greyBlue: #4d5c6b;
+  --grey: #606066;
+  /* also using: white, darkred(errors) */
+}
+
+html, body, h1, h3{
+  margin:0;
+  padding:0;
+  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+}

@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
-import { fbSquare, gpSquare, twSquare, userIcon, keyIcon } from '../icons';
+import { fbSquare, gpSquare, twSquare, userIcon, keyIcon, errIcon } from '../icons';
 import './LoginForm.css';
 
 
@@ -29,7 +29,7 @@ function LoginForm() {
         Sign In
       </h3>
       <form className='LoginForm' onSubmit={handleSubmit}>
-        { (errors.length > 0) ? <ul className='LoginFormErrors'>{errors.map((error, idx) => <li key={idx}>{error}</li>)}</ul> : null }
+        { (errors.length > 0) ? <ul className='LoginFormErrors'>{errors.map((error, idx) => <li key={idx}>{errIcon} {error}</li>)}</ul> : null }
         <label className='LoginFormUsernameLabel'>
           <div className='LoginFormInputIcon'>
             {/* Username or Email */}
