@@ -6,7 +6,7 @@ import * as sessionActions from "../../store/session";
 import { fbSquare, gpSquare, twSquare, userIcon, keyIcon, emailSquare, lockIcon, errIcon } from '../icons';
 import './SignupForm.css';
 
-function SignupFormModal() {
+function SignupFormModal({ setShowMenu }) {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const [email, setEmail] = useState("");
@@ -29,6 +29,10 @@ function SignupFormModal() {
     }
     return setErrors(['Confirm Password field must be the same as the Password field']);
   };
+
+  const menu = document.querySelector('.profile-dropdown')
+  menu.classList.add('hidden');
+  setShowMenu(false);
 
   return (
     <div className='SignupFormContainer'>

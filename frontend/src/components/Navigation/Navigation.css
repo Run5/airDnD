@@ -88,5 +88,16 @@
 .profile-dropdown {
   position: absolute;
   z-index: 1;
-  background-color: burlywood;
+  color: white;
+  background-color: var(--darkBlue);
+  list-style-type: none;
+  padding: 20px;
+  right: 120px;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px white;
+}
+
+
+.hidden {
+  display: none;
 }

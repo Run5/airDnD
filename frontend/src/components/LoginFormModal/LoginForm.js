@@ -6,7 +6,7 @@ import { fbSquare, gpSquare, twSquare, userIcon, keyIcon, errIcon } from '../ico
 import './LoginForm.css';
 
 
-function LoginForm() {
+function LoginForm({ setShowMenu }) {
   const dispatch = useDispatch();
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
@@ -22,6 +22,10 @@ function LoginForm() {
       }
     );
   };
+
+  const menu = document.querySelector('.profile-dropdown')
+  menu.classList.add('hidden');
+  setShowMenu(false);
 
   return (
     <div className='LoginFormContainer'>
