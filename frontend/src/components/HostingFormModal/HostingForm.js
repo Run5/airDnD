@@ -2,110 +2,116 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
-import * as sessionActions from "../../store/session";
-import { fbSquare, gpSquare, twSquare, userIcon, keyIcon, emailSquare, lockIcon, errIcon } from '../icons';
+import * as sessionActions from "../../store/dndsession";
+import { errIcon } from '../icons';
 import './HostingForm.css';
 
-function HostingFormModal() {
+function HostingForm() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [location, setLocation] = useState("");
+  const [map, setMap] = useState("");
+  const [party, setParty] = useState(4);
+  const [isPublic, setIsPublic] = useState(false);
+  const [inPerson, setInPerson] = useState(false);
   const [errors, setErrors] = useState([]);
 
   if (!sessionUser) return <Redirect to="/" />;
+  const host_id = sessionUser.id;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // if (password === confirmPassword) {
-    //   setErrors([]);
-    //   return dispatch(sessionActions.signup({ email, username, password }))
-    //     .catch(async (res) => {
-    //       const data = await res.json();
-    //       if (data && data.errors) setErrors(data.errors);
-    //     });
-    // }
-    // return setErrors(['Confirm Password field must be the same as the Password field']);
+
+    setErrors([]);
+
+    return dispatch(sessionActions.host({ host_id, description, location, map, party, isPublic, inPerson }))
+      .catch(async (res) => {
+        const data = await res.json();
+        if (data && data.errors) setErrors(data.errors);
+      });
   };
 
   return (
     <div className='HostingFormContainer'>
       <h3 className='HostingFormTitle'>
-        Register
+        Host a Session
       </h3>
       <form className='HostingForm' onSubmit={handleSubmit}>
         { (errors.length > 0) ? <ul className='HostingFormErrors'>{errors.map((error, idx) => <li key={idx}>{errIcon} {error}</li>)}</ul> : null }
-        <label className='HostingFormEmailLabel'>
-          <div className='HostingFormInputIcon'>
-            {/* Email */}
-            {emailSquare}
-          </div>
+        <label className='HostingFormLabel'>
           <input
-            className='HostingFormEmailInput'
+            className='HostingFormNameInput'
             type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder='name'
             required
-            placeholder='email'
           />
         </label>
-        <label className='HostingFormUsernameLabel'>
-          <div className='HostingFormInputIcon'>
-            {/* Username */}
-            {userIcon}
-          </div>
+        <label className='HostingFormLabel'>
           <input
-            className='HostingFormUsernameInput'
+            className='HostingFormDescriptionInput'
             type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-            placeholder='username'
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            placeholder='description'
           />
         </label>
-        <label className='HostingFormPasswordLabel'>
-          <div className='HostingFormInputIcon'>
-            {/* Password */}
-            {keyIcon}
-          </div>
+        <label className='HostingFormLabel'>
           <input
-            className='HostingFormPasswordInput'
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            placeholder='password'
+            className='HostingFormLocationInput'
+            type="text"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            placeholder='location'
           />
         </label>
-        <label className='HostingFormConfirmPasswordLabel'>
-          <div className='HostingFormInputIcon'>
-            {/* Confirm Password */}
-            {lockIcon}
-          </div>
+        <label className='HostingFormLabel'>
           <input
-            className='HostingFormConfirmPasswordInput'
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
+            className='HostingFormMapInput'
+            type="text"
+            value={map}
+            onChange={(e) => setMap(e.target.value)}
             required
-            placeholder='confirm password'
+            placeholder='map url'
           />
         </label>
-        <button type="submit" className='HostingFormSubmitButton'>Sign Up</button>
+        <label className='HostingFormLabel'>
+          <input
+            className='HostingFormPartyInput'
+            type="number"
+            value={party}
+            onChange={(e) => setParty(e.target.value)}
+            min='2'
+            max='16'
+            required
+          />
+        </label>
+        <label className='HostingFormLabel'>
+          <input
+            className='HostingFormIsPublicInput'
+            type="checkbox"
+            value={isPublic}
+            onChange={() => setIsPublic(!isPublic)}
+          />Set this session as public.
+        </label>
+        <label className='HostingFormLabel'>
+        <input
+            className='HostingFormInPersonInput'
+            type="checkbox"
+            value={inPerson}
+            onChange={() => setInPerson(!inPerson)}
+          />Is this session going to be in person?
+        </label>
+        <button type="submit" className='HostingFormSubmitButton'>Host my session!</button>
       </form>
-      <div className='HostingFormHosting'>
-        Already have an account?&ensp;
-        <a>Log In</a>
-      </div>
-      <div className='HostingFormIcons'>
-        <div className='HostingFormIcon'>{fbSquare}</div>
-        <div className='HostingFormIcon'>{gpSquare}</div>
-        <div className='HostingFormIcon'>{twSquare}</div>
+      <div className='HostingFormView'>
+        <a>View sessions you're hosting.</a>
       </div>
     </div>
   );
 }
 
-export default HostingFormModal;
+export default HostingForm;

@@ -7,6 +7,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       references: { model: 'Users' },
     },
+    name: {
+      type: DataTypes.STRING(40),
+      allowNull: false,
+    },
     description: {
       type: DataTypes.TEXT,
       validate: {
@@ -17,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(255),
     },
     map: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     party_max_size: {

@@ -23,11 +23,9 @@ module.exports = {
       },
       public: {
         type: Sequelize.BOOLEAN,
-        allowNull: false,
       },
       in_person: {
         type: Sequelize.BOOLEAN,
-        allowNull: false,
       },
       createdAt: {
         allowNull: false,

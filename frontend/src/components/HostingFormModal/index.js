@@ -1,17 +1,17 @@
-// frontend/src/components/SignupFormModal/index.js
+// frontend/src/components/HostingFormModal/index.js
 import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
 import HostingForm from './HostingForm';
 
-function HostingFormModal({ setShowMenu }) {
+function HostingFormModal({ btnTxt }) {
   const [showModal, setShowModal] = useState(false);
 
   return (
     <>
-      <button onClick={() => setShowModal(true)}>Let's Go!</button>
+      <button onClick={() => setShowModal(true)}>{btnTxt}</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <HostingForm setShowMenu={ setShowMenu }/>
+          <HostingForm />
         </Modal>
       )}
     </>

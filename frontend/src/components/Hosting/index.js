@@ -1,5 +1,5 @@
 import React from 'react';
-import HostingFormModal from '../HostingFormModal/HostingForm';
+import HostingFormModal from '../HostingFormModal';
 import { useSelector } from "react-redux";
 // import { NavLink } from 'react-router-dom';
 import './Hosting.css';
@@ -33,7 +33,7 @@ function Hosting() {
         <div className='HostingPageOutro'>
           Try hosting a session on Airdnd
           <p>Join us. We'll help you every step of the way.</p>
-          <HostingFormModal />
+          <HostingFormModal btnTxt={"Let's go!"} />
         </div>
       </div>
       <div className='HostingPageActualFooter'>

@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
+import HostingFormModal from "../HostingFormModal";
 import * as sessionActions from '../../store/session';
 import { d20, userIcon, barsIcon, searchIcon } from '../icons';
 import './Navigation.css';
@@ -58,6 +59,7 @@ function Navigation({ isLoaded }){
             <ul className="profile-dropdown hidden">
               <li>{sessionUser.username}</li>
               <li>{sessionUser.email}</li>
+              <li><HostingFormModal btnTxt={'Start Hosting'}/></li>
               <li><button onClick={logout}>Log Out</button></li>
             </ul> :
             <ul className="profile-dropdown hidden">

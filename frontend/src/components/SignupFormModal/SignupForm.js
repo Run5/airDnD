@@ -6,7 +6,7 @@ import * as sessionActions from "../../store/session";
 import { fbSquare, gpSquare, twSquare, userIcon, keyIcon, emailSquare, lockIcon, errIcon } from '../icons';
 import './SignupForm.css';
 
-function SignupFormModal({ setShowMenu }) {
+function SignupForm({ setShowMenu }) {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const [email, setEmail] = useState("");
@@ -112,4 +112,4 @@ function SignupFormModal({ setShowMenu }) {
   );
 }
 
-export default SignupFormModal;
+export default SignupForm;
