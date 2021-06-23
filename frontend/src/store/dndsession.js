@@ -111,12 +111,18 @@ export const getHost = () => async dispatch => {
 const dndsessionReducer = (state = {}, action) => {
   let newState;
   switch (action.type) {
-    case GET_HOST:
-      return action.session;
     case HOST:
       newState = Object.assign({}, state);
       newState.session = action.payload;
       return newState;
+    case EDIT_HOST:
+      newState = Object.assign({}, state);
+      newState.session = action.payload;
+      return newState;
+    case DELETE_HOST:
+      return newState;
+    case GET_HOST:
+      return action.session;
     default:
       return state;
   }

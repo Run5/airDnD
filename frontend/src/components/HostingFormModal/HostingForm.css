@@ -36,6 +36,7 @@
   background-color: var(--greyBlue);
 }
 
+.HostingFormNameInput,
 .HostingFormDescriptionInput,
 .HostingFormLocationInput,
 .HostingFormMapInput,
