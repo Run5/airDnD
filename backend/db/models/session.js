@@ -16,6 +16,10 @@ module.exports = (sequelize, DataTypes) => {
     location: {
       type: DataTypes.STRING(255),
     },
+    map: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
     party_max_size: {
       type: DataTypes.INTEGER,
       validate: {

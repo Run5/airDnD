@@ -33,9 +33,9 @@ function Navigation({ isLoaded }){
       </div>
       <div className='NavRightContainer'>
         <div className='NavBecomeHost'>
-          <button type='button' className='NavHostButton'>
+          <NavLink className='NavHostButton' to='/host'>
             Become a host
-          </button>
+          </NavLink>
         </div>
         <div className='NavLoginSignup'>
           <button

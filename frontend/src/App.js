@@ -5,6 +5,7 @@ import { Route, Switch } from "react-router-dom";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import Landing from "./components/Landing"
+import Hosting from "./components/Hosting"
 
 function App() {
   const dispatch = useDispatch();
