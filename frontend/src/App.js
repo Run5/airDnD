@@ -20,6 +20,9 @@ function App() {
         <Route exact path='/'>
           <Landing />
         </Route>
+        <Route path='/host'>
+          <Hosting />
+        </Route>
       </Switch>
     </>
   );

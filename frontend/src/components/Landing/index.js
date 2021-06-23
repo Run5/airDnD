@@ -1,7 +1,7 @@
 // frontend/src/components/Landing/index.js
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import './Landing.css';
 
 function Landing() {
