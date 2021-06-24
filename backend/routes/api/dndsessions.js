@@ -105,12 +105,14 @@ router.get(
 );
 
 router.delete(
-  'sessions/:id(\\d+)',
+  '/sessions/:id(\\d+)',
   asyncHandler(async (req, res) => {
     const id = req.params.id;
     const session = await Session.findByPk(id);
-    if (session) await session.destroy();
-    return res.json()
+    if (!session) throw new Error('Cannot find session');
+    const sessionId = session.id;
+    await Session.destroy({ where: { id: sessionId } });
+    return res.json({ sessionId })
   }),
 );
 

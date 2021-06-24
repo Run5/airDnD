@@ -81,6 +81,7 @@ export const createDndSession = (payload) => async dispatch => {
 const initialState = {};
 
 const dndSessionReducer = (state = initialState, action) => {
+  let newState = {}
   switch (action.type) {
     case LOAD: {
       const alldndsessions = {};
@@ -93,9 +94,12 @@ const dndSessionReducer = (state = initialState, action) => {
       };
     }
     case ADD_ONE:
-      let newState = {}
       newState = Object.assign({}, state);
       newState.dndsession = action.payload;
+      return newState;
+    case DELETE_SESSION:
+      newState = { ...state }
+      delete newState[action.id];
       return newState;
     default:
       return state;

@@ -17,16 +17,16 @@ function Hosting() {
     dispatch(getDndSessionByHost(4));
   }, [dispatch])
 
-  if (!dndSessions) {
-    return null;
-  }
+  // if (!dndSessions) {
+  //   return null;
+  // }
 
-  console.log(Object.keys(dndSessions))
+  // console.log(Object.keys(dndSessions))
 
-  const handleRemoveButtonClick = (e) => {
-    e.preventDefault();
-    dispatch(deleteDndSession());
-  }
+  // const handleRemoveButtonClick = (e) => {
+  //   e.preventDefault();
+  //   dispatch(deleteDndSession());
+  // }
 
   return (
     <div className='HostingPage'>
@@ -60,7 +60,10 @@ function Hosting() {
                 <div className='HostedSessionsRemove'>
                   <button
                     type='button'
-                    onClick={handleRemoveButtonClick}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      dispatch(deleteDndSession(sessionId));
+                    }}
                     className='HostedSessionsRemoveButton'
                   >
                     Remove
