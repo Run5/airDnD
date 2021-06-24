@@ -3,6 +3,7 @@ import { csrfFetch } from './csrf';
 
 
 const LOAD = 'host/LOAD';
+const LOAD_ONE = 'host/LOAD_ONE'
 const ADD_ONE = 'host/ADD_ONE';
 // const EDIT_HOST ='dndsession/EDIT_HOST';
 const DELETE_SESSION = 'host/DELETE_SESSION';
@@ -11,6 +12,11 @@ const DELETE_SESSION = 'host/DELETE_SESSION';
 const load = list => ({
   type: LOAD,
   list,
+});
+
+const loadOne = session => ({
+  type: LOAD_ONE,
+  session,
 });
 
 const addOneDndSession = dndsession => ({
@@ -53,12 +59,23 @@ export const deleteDndSession = (id) => async dispatch => {
 //   };
 // };
 
+export const getDndSingleSession = (sessionId) => async dispatch => {
+  console.log('SESSION ID IN THE DISPATCH CALL: ', sessionId)
+  const response = await csrfFetch(`/api/host/sessions/${sessionId}`);
+
+  console.log("RESPONSE FROM FETCH: ", response)
+  if (response.ok) {
+    const list = await response.json();
+    dispatch(load(list));
+  };
+};
+
 export const getDndSessionByHost = (hostId) => async dispatch => {
   const response = await csrfFetch(`/api/host/${hostId}`);
 
   if (response.ok) {
-    const list = await response.json();
-    dispatch(load(list));
+    const session = await response.json();
+    dispatch(loadOne(session));
   };
 };
 
@@ -83,7 +100,7 @@ const initialState = {};
 const dndSessionReducer = (state = initialState, action) => {
   let newState = {}
   switch (action.type) {
-    case LOAD: {
+    case LOAD:
       const alldndsessions = {};
       action.list.forEach(dndsession => {
         alldndsessions[dndsession.id] = dndsession;
@@ -92,10 +109,12 @@ const dndSessionReducer = (state = initialState, action) => {
         ...alldndsessions,
         ...state,
       };
-    }
+    case LOAD_ONE:
+      newState = action.session;
+      return newState;
     case ADD_ONE:
       newState = Object.assign({}, state);
-      newState.dndsession = action.payload;
+      newState[action.dndsession.id] = action.dndsession;
       return newState;
     case DELETE_SESSION:
       newState = { ...state }

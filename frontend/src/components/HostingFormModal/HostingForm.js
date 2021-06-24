@@ -21,16 +21,16 @@ function HostingForm() {
   if (!sessionUser) return <Redirect to="/" />;
   const host_id = sessionUser.id;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     setErrors([]);
 
-    return dispatch(sessionActions.createDndSession({ host_id, name, description, location, map, party, isPublic, inPerson }))
-      .catch(async (res) => {
-        const data = await res.json();
-        if (data && data.errors) setErrors(data.errors);
-      });
+    const res = await dispatch(sessionActions.createDndSession({ host_id, name, description, location, map, party, isPublic, inPerson }))
+
+    if(res) return res;
+    else throw new Error('Failed to create session');
+
   };
 
   return (

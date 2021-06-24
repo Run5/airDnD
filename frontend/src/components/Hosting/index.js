@@ -13,9 +13,12 @@ function Hosting() {
   });
   const sessionUser = useSelector((state) => state.session.user);
 
+
   useEffect(() => {
-    dispatch(getDndSessionByHost(4));
-  }, [dispatch])
+
+    if(sessionUser) dispatch(getDndSessionByHost(sessionUser.id));
+
+  }, [dispatch, sessionUser])
 
   // if (!dndSessions) {
   //   return null;
@@ -36,7 +39,7 @@ function Hosting() {
         </div>
         <div className='HostingPageExample'>
           This will be an example session
-          <ExampleHost />
+          {/* <ExampleHost /> */}
         </div>
       </div>
       <div className='HostingPageHostAnything'>
@@ -47,10 +50,10 @@ function Hosting() {
           return (
             <NavLink key={sessionId} to={`/sessions/${sessionId}`}>
               <div className='HostedSessionsContainer'>
-                <h1>{dndSessions[sessionId].name}</h1>
+                <h1>{dndSessions[sessionId]?.name}</h1>
                 <div
                   className="HostedSessionsMap"
-                  style={{ backgroundImage: `url('${dndSessions[sessionId].map}')` }}
+                  style={{ backgroundImage: `url('${dndSessions[sessionId]?.map}')` }}
                 >
 
                 </div>

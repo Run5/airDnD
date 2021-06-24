@@ -24,18 +24,7 @@ router.post(
   validateSession,
   asyncHandler(async (req, res) => {
     const { host_id, name, description, location, map, party, isPublic, inPerson } = req.body;
-    // const session = await Session.create({
-    //   host_id,
-    //   name,
-    //   description,
-    //   location,
-    //   map,
-    //   party_max_size: party,
-    //   public: isPublic,
-    //   in_person: inPerson
-    // });
-
-    const session = await SessionRepository.create({
+    const session = await Session.create({
       host_id,
       name,
       description,
@@ -44,13 +33,9 @@ router.post(
       party_max_size: party,
       public: isPublic,
       in_person: inPerson
-    })
+    });
 
     return res.json(session);
-
-    // return res.json({
-    //   session,
-    // });
   }),
 );
 
@@ -96,10 +81,10 @@ router.get(
 router.get(
   'sessions/:id(\\d+)',
   asyncHandler(async (req, res) => {
-    const id = req.params.id;
-    const session = await Session.findByPk(id, {
-      include: User
-    });
+    const { id } = req.params;
+    console.log('ID PASSED TO BACKEND ROUTE', id)
+    const session = await Session.findByPk(id);
+    console.log('SESSION FOUND FROM TABLE', session)
     return res.json(session);
   }),
 );

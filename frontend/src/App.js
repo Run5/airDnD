@@ -6,6 +6,7 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import Landing from "./components/Landing"
 import Hosting from "./components/Hosting"
+import SingleSession from "./components/SingleSession"
 
 function App() {
   const dispatch = useDispatch();
@@ -23,6 +24,9 @@ function App() {
         </Route>
         <Route exact path='/host'>
           <Hosting />
+        </Route>
+        <Route path='/sessions/:sessionId'>
+          <SingleSession />
         </Route>
       </Switch>
     </>
