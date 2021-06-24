@@ -43,25 +43,27 @@ router.patch(
   '/:id(\\d+)',
   validateSession,
   asyncHandler(async (req, res) => {
-    // const id = req.params.id;
-    // const session = await Session.findByPk(id);
-    // await session.update({
-    //   host_id,
-    //   name,
-    //   description,
-    //   location,
-    //   map,
-    //   party_max_size: party,
-    //   public: isPublic,
-    //   in_person: inPerson
-    // });
+    const { id } = req.params;
+    const session = await Session.findByPk(id);
+    if (!session) throw new Error('Cannot find session');
+    const { name, description, location, map, party, isPublic, inPerson } = req.body;
+    await session.update({
+      name,
+      description,
+      location,
+      map,
+      party_max_size: party,
+      public: isPublic,
+      in_person: inPerson
+    });
 
     // return res.json({
     //   session,
     // });
 
-    const id = await SessionRepository.update(req.body);
-    const session = await SessionRepository.one(id);
+
+    // const id = await SessionRepository.update(req.body);
+    // const session = await SessionRepository.one(id);
     return res.json(session);
   }),
 );

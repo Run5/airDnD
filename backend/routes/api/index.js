@@ -6,6 +6,7 @@ const router = require('express').Router();
 // Internal Imports
 // const { setTokenCookie } = require('../../utils/auth.js');
 // const { User } = require('../../db/models');
+// const { Session } = require('../../db/models');
 // const { restoreUser } = require('../../utils/auth.js');
 // const { requireAuth } = require('../../utils/auth.js');
 const sessionRouter = require('./session.js');
@@ -16,7 +17,6 @@ router.use('/session', sessionRouter);
 
 router.use('/users', usersRouter);
 router.use('/host', dndSessionRouter);
-
 
 
 /* CODE FOR TESTING */

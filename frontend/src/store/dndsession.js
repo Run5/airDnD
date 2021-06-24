@@ -5,9 +5,8 @@ import { csrfFetch } from './csrf';
 const LOAD = 'host/LOAD';
 const LOAD_ONE = 'host/LOAD_ONE'
 const ADD_ONE = 'host/ADD_ONE';
-// const EDIT_HOST ='dndsession/EDIT_HOST';
 const DELETE_SESSION = 'host/DELETE_SESSION';
-// const GET_HOST = 'dndsession/GET_HOST';
+
 
 const load = list => ({
   type: LOAD,
@@ -29,20 +28,6 @@ const removeDndSession = id => ({
   id,
 });
 
-// const setdndsession = (dndsession) => {
-//   return {
-//     type: HOST,
-//     payload: dndsession,
-//   };
-// };
-
-// const editdndsession = (dndsession) => {
-//   return {
-//     type: EDIT_HOST,
-//     payload: dndsession,
-//   };
-// };
-
 export const deleteDndSession = (id) => async dispatch => {
   const response = await csrfFetch(`api/host/sessions/${id}`, {
     method: 'DELETE',
@@ -52,21 +37,11 @@ export const deleteDndSession = (id) => async dispatch => {
   return response;
 };
 
-// const getdndsession = (dndsession) => {
-//   return {
-//     type: GET_HOST,
-//     payload: dndsession,
-//   };
-// };
-
 export const getDndSingleSession = (sessionId) => async dispatch => {
-  console.log('SESSION ID IN THE DISPATCH CALL: ', sessionId)
   const response = await csrfFetch(`/api/host/sessions/${sessionId}`);
 
-  console.log("RESPONSE FROM FETCH: ", response)
   if (response.ok) {
     const singleSession = await response.json();
-    console.log('THIS IS THE SESSION AFTER OKAY RESPONSE: ', singleSession)
     dispatch(loadOne(singleSession));
   };
 };
@@ -96,6 +71,22 @@ export const createDndSession = (payload) => async dispatch => {
   };
 };
 
+export const patchDndSession = (sessionId, payload) => async dispatch => {
+  const response = await csrfFetch(`/api/host/${sessionId}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload),
+  })
+
+  if (response.ok) {
+    const dndsession = await response.json();
+    dispatch(addOneDndSession(dndsession));
+    return dndsession;
+  };
+};
+
 const initialState = {};
 
 const dndSessionReducer = (state = initialState, action) => {
@@ -111,7 +102,6 @@ const dndSessionReducer = (state = initialState, action) => {
         ...state,
       };
     case LOAD_ONE:
-      console.log("THIS IS THE REDUCER: ", action.singleSession)
       newState = { ...action.singleSession };
       return newState;
     case ADD_ONE:
@@ -119,6 +109,7 @@ const dndSessionReducer = (state = initialState, action) => {
       newState[action.dndsession.id] = action.dndsession;
       return newState;
     case DELETE_SESSION:
+      console.log('THIS IS THE STATE IN THE REDUCER: ', state)
       newState = { ...state }
       delete newState[action.id];
       return newState;

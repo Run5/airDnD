@@ -1,0 +1,77 @@
+@import "../styles.css";
+
+.HostingFormEditContainer {
+  background-color: var(--lightBlue);
+  color: white;
+  width: 300px;
+  margin: 200px auto;
+  border: 2px solid var(--darkBlue);
+  border-radius: 10px;
+}
+
+.HostingFormEditErrors {
+  width: 90%;
+  margin: 10px auto;
+  list-style-type: none;
+  color: darkred;
+  padding-left: 0;
+}
+
+.HostingFormEditTitle {
+  margin: 20px 20px;
+  font-size: 2.5em;
+}
+
+.HostingFormEdit {
+  display: flex;
+  flex-direction: column;
+}
+
+.HostingFormEditLabel {
+  padding: 5px;
+  width: 90%;
+  margin: 10px auto;
+  display: flex;
+  border-radius: 5px;
+  background-color: var(--greyBlue);
+}
+
+.HostingFormEditNameInput,
+.HostingFormEditDescriptionInput,
+.HostingFormEditLocationInput,
+.HostingFormEditMapInput,
+.HostingFormEditPartyInput {
+  width: 100%
+}
+
+.HostingFormEditSubmitButton {
+  width: 90%;
+  height: 50px;
+  font-size: 2em;
+  border-radius: 8px;
+  margin: 10px auto;
+  background-color: var(--greyBlue);
+  color: white;
+  border: 2px solid var(--greyBlue);
+}
+
+.HostingFormEditSubmitButton:hover {
+  transition: all 0.4s ease 0s;
+  background-color: var(--brightBlue);
+  cursor: pointer;
+}
+
+.HostingFormEditView {
+  width: 90%;
+  margin: 10px auto;
+}
+
+.HostingFormEditView > a {
+  color: var(--darkBlue);
+  text-decoration: none;
+}
+
+.HostingFormEditView > a:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}

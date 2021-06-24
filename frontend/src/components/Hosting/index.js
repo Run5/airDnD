@@ -20,17 +20,6 @@ function Hosting() {
 
   }, [dispatch, sessionUser])
 
-  // if (!dndSessions) {
-  //   return null;
-  // }
-
-  // console.log(Object.keys(dndSessions))
-
-  // const handleRemoveButtonClick = (e) => {
-  //   e.preventDefault();
-  //   dispatch(deleteDndSession());
-  // }
-
   return (
     <div className='HostingPage'>
       <div className='HostingPageHeader'>
