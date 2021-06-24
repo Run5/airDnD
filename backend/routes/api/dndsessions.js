@@ -2,7 +2,7 @@ const express = require('express');
 const asyncHandler = require('express-async-handler');
 const { check } = require('express-validator');
 
-// const { Session } = require('../../db/models');
+const { Session } = require('../../db/models');
 const SessionRepository = require('../../db/sessions-repository')
 const { handleValidationErrors } = require('../../utils/validation');
 
@@ -81,51 +81,38 @@ router.patch(
   }),
 );
 
-router.delete(
-  '/:id(\\d+)',
+
+router.get(
+  '/:hostId(\\d+)',
+  asyncHandler(async (req, res) => {
+    const { hostId } = req.params
+    const sessions = await Session.findAll({
+      where: { host_id: hostId }
+    });
+    return res.json(sessions);
+  }),
+);
+
+router.get(
+  'sessions/:id(\\d+)',
   asyncHandler(async (req, res) => {
     const id = req.params.id;
-    // const session = await Session.findByPk(id);
-    const session = await SessionRepository.one(id);
+    const session = await Session.findByPk(id, {
+      include: User
+    });
+    return res.json(session);
+  }),
+);
+
+router.delete(
+  'sessions/:id(\\d+)',
+  asyncHandler(async (req, res) => {
+    const id = req.params.id;
+    const session = await Session.findByPk(id);
     if (session) await session.destroy();
     return res.json()
   }),
 );
 
-router.get(
-  '/:id(\\d+)',
-  validateSession,
-  asyncHandler(async (req, res) => {
-  //   const id = req.params.id;
-  //   const session = await Session.findByPk(id, {
-  //     include: User
-  //   });
-
-  //   return res.json({
-  //     session,
-  //   });
-    const session = await SessionRepository.one(req.params.id);
-    return res.json(session);
-  }),
-);
-
-router.get(
-  '/:hostId(\\d+)',
-  validateSession,
-  asyncHandler(async (req, res) => {
-    // const id = req.params.id;
-    // const hostId = req.params.hostId;
-    // const session = await Session.findAll({
-    //   include: User,
-    //   where: { host_id: id }
-    // });
-
-    // return res.json({
-    //   session,
-    // });
-    const sessions = await SessionRepository.listByOne(req.params.hostId);
-    return res.json(sessions);
-  }),
-);
 
 module.exports = router;

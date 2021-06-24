@@ -18,7 +18,7 @@ const addOneDndSession = dndsession => ({
   dndsession,
 });
 
-const remove = () => ({
+const removeDndSession = () => ({
   type: DELETE_SESSION
 });
 
@@ -36,11 +36,13 @@ const remove = () => ({
 //   };
 // };
 
-// const deletedndsession = () => {
-//   return {
-//     type: DELETE_HOST,
-//   };
-// };
+export const deleteDndSession = async (id) => {
+  const response = await csrfFetch(`api/host/sessions/${id}`)
+
+  return {
+    type: DELETE_SESSION,
+  };
+};
 
 // const getdndsession = (dndsession) => {
 //   return {
@@ -49,83 +51,8 @@ const remove = () => ({
 //   };
 // };
 
-// export const host = (dndsession) => async (dispatch) => {
-//   const {
-//     host_id,
-//     name,
-//     description,
-//     location,
-//     map,
-//     party,
-//     isPublic,
-//     inPerson
-//   } = dndsession;
-//   const response = await csrfFetch('/api/host/', {
-//     method: "POST",
-//     body: JSON.stringify({
-//       host_id,
-//       name,
-//       description,
-//       location,
-//       map,
-//       party,
-//       isPublic,
-//       inPerson
-//     }),
-//   });
-//   const data = await response.json();
-//   dispatch(setdndsession(data.dndsession));
-//   return response;
-// };
-
-// export const editHost = (dndsession) => async dispatch => {
-//   const {
-//     host_id,
-//     name,
-//     description,
-//     location,
-//     map,
-//     party,
-//     isPublic,
-//     inPerson
-//   } = dndsession;
-//   const response = await csrfFetch('/api/host/editdndsession', {
-//     method: "PATCH",
-//     body: JSON.stringify({
-//       host_id,
-//       name,
-//       description,
-//       location,
-//       map,
-//       party,
-//       isPublic,
-//       inPerson
-//     }),
-//   });
-//   const data = await response.json();
-//   dispatch(editdndsession(data.dndsession));
-//   return response;
-// };
-
-// export const deleteHost = () => async (dispatch) => {
-//   const response = await csrfFetch('/api/host/deletedndsession', {
-//     method: 'DELETE',
-//   });
-//   dispatch(deletedndsession());
-//   return response;
-// };
-
-// export const getHost = () => async dispatch => {
-//   const response = await csrfFetch(`/api/host/getSingledndsession`);
-
-//   if (response.ok) {
-//     const dndsession = await response.json();
-//     dispatch(getdndsession(dndsession));
-//   };
-// };
-
-export const getDndSession = () => async dispatch => {
-  const response = await csrfFetch(`/api/host`);
+export const getDndSessionByHost = (hostId) => async dispatch => {
+  const response = await csrfFetch(`/api/host/${hostId}`);
 
   if (response.ok) {
     const list = await response.json();
@@ -134,9 +61,6 @@ export const getDndSession = () => async dispatch => {
 };
 
 export const createDndSession = (payload) => async dispatch => {
-  // const dndsessionBody = JSON.stringify(payload);
-  // dndsessionBody.party = Number(dndsessionBody.party)
-
   const response = await csrfFetch(`/api/host/`, {
     method: 'POST',
     headers: {
@@ -152,36 +76,7 @@ export const createDndSession = (payload) => async dispatch => {
   };
 };
 
-// const dndsessionReducer = (state = {}, action) => {
-//   let newState;
-//   switch (action.type) {
-//     case HOST:
-//       newState = Object.assign({}, state);
-//       newState.dndsession = action.payload;
-//       return newState;
-//     case EDIT_HOST:
-//       newState = Object.assign({}, state);
-//       newState.dndsession = action.payload;
-//       return newState;
-//     case DELETE_HOST:
-//       return newState;
-//     case GET_HOST:
-//       newState = {...action.dndsession};
-//       return newState;
-//     default:
-//       return state;
-//   }
-// };
-
-const initialState = {
-  list: [],
-};
-
-const sortList = (list) => {
-  return list.sort((dndsessionA, dndsessionB) => {
-    return dndsessionA.id - dndsessionB.id;
-  }).map((dndsession) => dndsession.id);
-};
+const initialState = {};
 
 const dndSessionReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -193,7 +88,6 @@ const dndSessionReducer = (state = initialState, action) => {
       return {
         ...alldndsessions,
         ...state,
-        list: sortList(action.list),
       };
     }
     case ADD_ONE:

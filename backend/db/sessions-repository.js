@@ -42,9 +42,10 @@ async function list() {
 
 async function listByOne(id) {
   const host_id = id
-  return await Session.findAll({
+  const allHostSessions =  await Session.findAll({
     where: host_id
   });
+  return allHostSessions;
 }
 
 async function one(id) {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { getDndSession } from '../../store/dndsession'
+import { getDndSessionByHost } from '../../store/dndsession'
 // import * as sessionActions from "../../store/dndsession";
 // import { errIcon } from '../icons';
 
@@ -12,7 +12,7 @@ function ExampleHost() {
   const sessions = useSelector(state => state.session)
 
   useEffect(() => {
-    dispatch(getDndSession());
+    dispatch(getDndSessionByHost(4));
   }, [dispatch])
 
   return (

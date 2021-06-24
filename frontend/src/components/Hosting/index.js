@@ -1,25 +1,32 @@
 import React, { useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
 import HostingFormModal from '../HostingFormModal';
 import ExampleHost from './ExampleHost';
-import { useDispatch, useSelector } from "react-redux";
+import { getDndSessionByHost,  deleteDndSession } from '../../store/dndsession';
 import './Hosting.css';
-import { getDndSession } from '../../store/dndsession';
 
 function Hosting() {
   const dispatch = useDispatch();
-  // const dndSessions = useSelector(state => {
-  //   console.log('>>>>>>>>>', state.dndsession)
-  //   return state.session.list.map(sessionId => state.session[sessionId]);
-  // });
+  const dndSessions = useSelector(state => {
+    return state.dndsession;
+  });
   const sessionUser = useSelector((state) => state.session.user);
 
   useEffect(() => {
-    dispatch(getDndSession());
+    dispatch(getDndSessionByHost(4));
   }, [dispatch])
 
-  // if (!dndSessions) {
-  //   return null;
-  // }
+  if (!dndSessions) {
+    return null;
+  }
+
+  console.log(Object.keys(dndSessions))
+
+  const handleRemoveButtonClick = (e) => {
+    e.preventDefault();
+    dispatch(deleteDndSession());
+  }
 
   return (
     <div className='HostingPage'>
@@ -29,7 +36,6 @@ function Hosting() {
         </div>
         <div className='HostingPageExample'>
           This will be an example session
-          {/* Here is the sessions: {dndSessions} */}
           <ExampleHost />
         </div>
       </div>
@@ -37,7 +43,24 @@ function Hosting() {
 
       </div>
       <div className='HostingPageYourSessions'>
+        {Object.keys(dndSessions).map((sessionId) => {
+          return (
+            <NavLink key={sessionId} to={`/sessions/${sessionId}`}>
+              <div className=''>
+                <h1>{dndSessions[sessionId].name}</h1>
+                <div className="HostedSessionsMap" style={{ backgroundImage: `url('${dndSessions[sessionId].map}')` }}>
 
+                </div>
+                <div>
+
+                </div>
+                <div className='HostedSessionsRemove'>
+                  <button type='button' onClick={handleRemoveButtonClick(sessionId)} className='HostedSessionsRemoveButton'>Remove</button>
+                </div>
+              </div>
+            </NavLink>
+          );
+        })}
       </div>
       <div className='HostingPageIdeas'>
 
