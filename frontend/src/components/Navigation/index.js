@@ -20,7 +20,7 @@ function Navigation({ isLoaded }){
   };
 
   return (
-    <div className='NavigationContainer'>
+    <nav className='NavigationContainer'>
       <div className='NavHome'>
         <NavLink exact to='/'>{d20} airdnd</NavLink>
       </div>
@@ -68,7 +68,7 @@ function Navigation({ isLoaded }){
             </ul>}
         </div>
       </div>
-    </div>
+    </nav>
   );
 }
 

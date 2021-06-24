@@ -21,7 +21,7 @@ function App() {
         <Route exact path='/'>
           <Landing />
         </Route>
-        <Route path='/host'>
+        <Route exact path='/host'>
           <Hosting />
         </Route>
       </Switch>

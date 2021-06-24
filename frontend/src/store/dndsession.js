@@ -1,131 +1,209 @@
 // frontend/src/store/dndsession.js
 import { csrfFetch } from './csrf';
 
-const HOST = 'dndsession/host';
-const EDIT_HOST ='dndsession/editHost';
-const DELETE_HOST = 'dndsession/deleteHost';
-const GET_HOST = 'dndsession/getHost';
 
-const setSession = (session) => {
-  return {
-    type: HOST,
-    payload: session,
-  };
-};
+const LOAD = 'host/LOAD';
+const ADD_ONE = 'host/ADD_ONE';
+// const EDIT_HOST ='dndsession/EDIT_HOST';
+const DELETE_SESSION = 'host/DELETE_SESSION';
+// const GET_HOST = 'dndsession/GET_HOST';
 
-const editSession = (session) => {
-  return {
-    type: EDIT_HOST,
-    payload: session,
-  };
-};
+const load = list => ({
+  type: LOAD,
+  list,
+});
 
-const deleteSession = () => {
-  return {
-    type: DELETE_HOST,
-  };
-};
+const addOneDndSession = dndsession => ({
+  type: ADD_ONE,
+  dndsession,
+});
 
-const getSession = (session) => {
-  return {
-    type: GET_HOST,
-    payload: session,
-  };
-};
+const remove = () => ({
+  type: DELETE_SESSION
+});
 
-export const host = (session) => async (dispatch) => {
-  const {
-    host_id,
-    name,
-    description,
-    location,
-    map,
-    party,
-    isPublic,
-    inPerson
-  } = session;
-  const response = await csrfFetch('/api/host/createSession', {
-    method: "POST",
-    body: JSON.stringify({
-      host_id,
-      name,
-      description,
-      location,
-      map,
-      party,
-      isPublic,
-      inPerson
-    }),
-  });
-  const data = await response.json();
-  dispatch(setSession(data.session));
-  return response;
-};
+// const setdndsession = (dndsession) => {
+//   return {
+//     type: HOST,
+//     payload: dndsession,
+//   };
+// };
 
-export const editHost = (session) => async dispatch => {
-  const {
-    host_id,
-    name,
-    description,
-    location,
-    map,
-    party,
-    isPublic,
-    inPerson
-  } = session;
-  const response = await csrfFetch('/api/host/editSession', {
-    method: "PATCH",
-    body: JSON.stringify({
-      host_id,
-      name,
-      description,
-      location,
-      map,
-      party,
-      isPublic,
-      inPerson
-    }),
-  });
-  const data = await response.json();
-  dispatch(editSession(data.session));
-  return response;
-};
+// const editdndsession = (dndsession) => {
+//   return {
+//     type: EDIT_HOST,
+//     payload: dndsession,
+//   };
+// };
 
-export const deleteHost = () => async (dispatch) => {
-  const response = await csrfFetch('/api/host/deleteSession', {
-    method: 'DELETE',
-  });
-  dispatch(deleteSession());
-  return response;
-};
+// const deletedndsession = () => {
+//   return {
+//     type: DELETE_HOST,
+//   };
+// };
 
-export const getHost = () => async dispatch => {
-  const response = await csrfFetch(`/api/host/getSingleSession`);
+// const getdndsession = (dndsession) => {
+//   return {
+//     type: GET_HOST,
+//     payload: dndsession,
+//   };
+// };
+
+// export const host = (dndsession) => async (dispatch) => {
+//   const {
+//     host_id,
+//     name,
+//     description,
+//     location,
+//     map,
+//     party,
+//     isPublic,
+//     inPerson
+//   } = dndsession;
+//   const response = await csrfFetch('/api/host/', {
+//     method: "POST",
+//     body: JSON.stringify({
+//       host_id,
+//       name,
+//       description,
+//       location,
+//       map,
+//       party,
+//       isPublic,
+//       inPerson
+//     }),
+//   });
+//   const data = await response.json();
+//   dispatch(setdndsession(data.dndsession));
+//   return response;
+// };
+
+// export const editHost = (dndsession) => async dispatch => {
+//   const {
+//     host_id,
+//     name,
+//     description,
+//     location,
+//     map,
+//     party,
+//     isPublic,
+//     inPerson
+//   } = dndsession;
+//   const response = await csrfFetch('/api/host/editdndsession', {
+//     method: "PATCH",
+//     body: JSON.stringify({
+//       host_id,
+//       name,
+//       description,
+//       location,
+//       map,
+//       party,
+//       isPublic,
+//       inPerson
+//     }),
+//   });
+//   const data = await response.json();
+//   dispatch(editdndsession(data.dndsession));
+//   return response;
+// };
+
+// export const deleteHost = () => async (dispatch) => {
+//   const response = await csrfFetch('/api/host/deletedndsession', {
+//     method: 'DELETE',
+//   });
+//   dispatch(deletedndsession());
+//   return response;
+// };
+
+// export const getHost = () => async dispatch => {
+//   const response = await csrfFetch(`/api/host/getSingledndsession`);
+
+//   if (response.ok) {
+//     const dndsession = await response.json();
+//     dispatch(getdndsession(dndsession));
+//   };
+// };
+
+export const getDndSession = () => async dispatch => {
+  const response = await csrfFetch(`/api/host`);
 
   if (response.ok) {
-    const session = await response.json();
-    dispatch(getSession(session));
+    const list = await response.json();
+    dispatch(load(list));
   };
 };
 
-const dndsessionReducer = (state = {}, action) => {
-  let newState;
+export const createDndSession = (payload) => async dispatch => {
+  // const dndsessionBody = JSON.stringify(payload);
+  // dndsessionBody.party = Number(dndsessionBody.party)
+
+  const response = await csrfFetch(`/api/host/`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload),
+  })
+
+  if (response.ok) {
+    const dndsession = await response.json();
+    dispatch(addOneDndSession(dndsession));
+    return dndsession;
+  };
+};
+
+// const dndsessionReducer = (state = {}, action) => {
+//   let newState;
+//   switch (action.type) {
+//     case HOST:
+//       newState = Object.assign({}, state);
+//       newState.dndsession = action.payload;
+//       return newState;
+//     case EDIT_HOST:
+//       newState = Object.assign({}, state);
+//       newState.dndsession = action.payload;
+//       return newState;
+//     case DELETE_HOST:
+//       return newState;
+//     case GET_HOST:
+//       newState = {...action.dndsession};
+//       return newState;
+//     default:
+//       return state;
+//   }
+// };
+
+const initialState = {
+  list: [],
+};
+
+const sortList = (list) => {
+  return list.sort((dndsessionA, dndsessionB) => {
+    return dndsessionA.id - dndsessionB.id;
+  }).map((dndsession) => dndsession.id);
+};
+
+const dndSessionReducer = (state = initialState, action) => {
   switch (action.type) {
-    case HOST:
+    case LOAD: {
+      const alldndsessions = {};
+      action.list.forEach(dndsession => {
+        alldndsessions[dndsession.id] = dndsession;
+      });
+      return {
+        ...alldndsessions,
+        ...state,
+        list: sortList(action.list),
+      };
+    }
+    case ADD_ONE:
+      let newState = {}
       newState = Object.assign({}, state);
-      newState.session = action.payload;
+      newState.dndsession = action.payload;
       return newState;
-    case EDIT_HOST:
-      newState = Object.assign({}, state);
-      newState.session = action.payload;
-      return newState;
-    case DELETE_HOST:
-      return newState;
-    case GET_HOST:
-      return action.session;
     default:
       return state;
   }
 };
 
-export default dndsessionReducer;
+export default dndSessionReducer;

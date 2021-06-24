@@ -2,7 +2,8 @@ const express = require('express');
 const asyncHandler = require('express-async-handler');
 const { check } = require('express-validator');
 
-const { Session } = require('../../db/models');
+// const { Session } = require('../../db/models');
+const SessionRepository = require('../../db/sessions-repository')
 const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
@@ -19,11 +20,22 @@ const validateSession = [
 ];
 
 router.post(
-  '/createSession',
+  '/',
   validateSession,
   asyncHandler(async (req, res) => {
     const { host_id, name, description, location, map, party, isPublic, inPerson } = req.body;
-    const session = await Session.create({
+    // const session = await Session.create({
+    //   host_id,
+    //   name,
+    //   description,
+    //   location,
+    //   map,
+    //   party_max_size: party,
+    //   public: isPublic,
+    //   in_person: inPerson
+    // });
+
+    const session = await SessionRepository.create({
       host_id,
       name,
       description,
@@ -32,75 +44,87 @@ router.post(
       party_max_size: party,
       public: isPublic,
       in_person: inPerson
-    });
+    })
 
-    return res.json({
-      session,
-    });
+    return res.json(session);
+
+    // return res.json({
+    //   session,
+    // });
   }),
 );
 
 router.patch(
-  '/editSession/:id(\\d+)',
+  '/:id(\\d+)',
   validateSession,
   asyncHandler(async (req, res) => {
-    const id = req.params.id;
-    const session = await Session.findByPk(id);
-    await session.update({
-      host_id,
-      name,
-      description,
-      location,
-      map,
-      party_max_size: party,
-      public: isPublic,
-      in_person: inPerson
-    });
+    // const id = req.params.id;
+    // const session = await Session.findByPk(id);
+    // await session.update({
+    //   host_id,
+    //   name,
+    //   description,
+    //   location,
+    //   map,
+    //   party_max_size: party,
+    //   public: isPublic,
+    //   in_person: inPerson
+    // });
 
-    return res.json({
-      session,
-    });
+    // return res.json({
+    //   session,
+    // });
+
+    const id = await SessionRepository.update(req.body);
+    const session = await SessionRepository.one(id);
+    return res.json(session);
   }),
 );
 
 router.delete(
-  '/deleteSession/:id(\\d+)',
+  '/:id(\\d+)',
   asyncHandler(async (req, res) => {
     const id = req.params.id;
-    const session = await Session.findByPk(id);
+    // const session = await Session.findByPk(id);
+    const session = await SessionRepository.one(id);
     if (session) await session.destroy();
     return res.json()
   }),
 );
 
 router.get(
-  '/getSingleSession/:id(\\d+)',
+  '/:id(\\d+)',
   validateSession,
   asyncHandler(async (req, res) => {
-    const id = req.params.id;
-    const session = await Session.findByPk(id, {
-      include: User
-    });
+  //   const id = req.params.id;
+  //   const session = await Session.findByPk(id, {
+  //     include: User
+  //   });
 
-    return res.json({
-      session,
-    });
+  //   return res.json({
+  //     session,
+  //   });
+    const session = await SessionRepository.one(req.params.id);
+    return res.json(session);
   }),
 );
 
 router.get(
-  '/getAllMySession/:id(\\d+)',
+  '/:hostId(\\d+)',
   validateSession,
   asyncHandler(async (req, res) => {
-    const id = req.params.id;
-    const session = await Session.findAll({
-      include: User,
-      where: { host_id: id }
-    });
+    // const id = req.params.id;
+    // const hostId = req.params.hostId;
+    // const session = await Session.findAll({
+    //   include: User,
+    //   where: { host_id: id }
+    // });
 
-    return res.json({
-      session,
-    });
+    // return res.json({
+    //   session,
+    // });
+    const sessions = await SessionRepository.listByOne(req.params.hostId);
+    return res.json(sessions);
   }),
 );
 

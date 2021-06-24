@@ -26,7 +26,7 @@ function HostingForm() {
 
     setErrors([]);
 
-    return dispatch(sessionActions.host({ host_id, description, location, map, party, isPublic, inPerson }))
+    return dispatch(sessionActions.createDndSession({ host_id, name, description, location, map, party, isPublic, inPerson }))
       .catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) setErrors(data.errors);
@@ -83,7 +83,7 @@ function HostingForm() {
             className='HostingFormPartyInput'
             type="number"
             value={party}
-            onChange={(e) => setParty(e.target.value)}
+            onChange={(e) => setParty(Number(e.target.value))}
             min='2'
             max='16'
             required
