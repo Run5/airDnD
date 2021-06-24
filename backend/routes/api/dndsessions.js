@@ -79,7 +79,7 @@ router.get(
 );
 
 router.get(
-  'sessions/:id(\\d+)',
+  '/sessions/:id(\\d+)',
   asyncHandler(async (req, res) => {
     const { id } = req.params;
     console.log('ID PASSED TO BACKEND ROUTE', id)
