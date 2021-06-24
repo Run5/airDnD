@@ -66,7 +66,7 @@ export const getDndSingleSession = (sessionId) => async dispatch => {
   console.log("RESPONSE FROM FETCH: ", response)
   if (response.ok) {
     const list = await response.json();
-    dispatch(load(list));
+    dispatch(loadOne(list));
   };
 };
 
@@ -75,7 +75,7 @@ export const getDndSessionByHost = (hostId) => async dispatch => {
 
   if (response.ok) {
     const session = await response.json();
-    dispatch(loadOne(session));
+    dispatch(load(session));
   };
 };
 
