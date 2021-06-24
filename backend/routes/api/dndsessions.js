@@ -82,10 +82,8 @@ router.get(
   '/sessions/:id(\\d+)',
   asyncHandler(async (req, res) => {
     const { id } = req.params;
-    console.log('ID PASSED TO BACKEND ROUTE', id)
     const session = await Session.findByPk(id);
     if (!session) throw new Error('Cannot find session');
-    console.log('SESSION FOUND FROM TABLE', session)
     return res.json(session);
   }),
 );

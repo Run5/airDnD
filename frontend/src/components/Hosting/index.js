@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import HostingFormModal from '../HostingFormModal';
-import ExampleHost from './ExampleHost';
+// import ExampleHost from './ExampleHost';
 import { getDndSessionByHost,  deleteDndSession } from '../../store/dndsession';
 import './Hosting.css';
 

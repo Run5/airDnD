@@ -14,9 +14,9 @@ const load = list => ({
   list,
 });
 
-const loadOne = session => ({
+const loadOne = singleSession => ({
   type: LOAD_ONE,
-  session,
+  singleSession,
 });
 
 const addOneDndSession = dndsession => ({
@@ -65,8 +65,9 @@ export const getDndSingleSession = (sessionId) => async dispatch => {
 
   console.log("RESPONSE FROM FETCH: ", response)
   if (response.ok) {
-    const list = await response.json();
-    dispatch(loadOne(list));
+    const singleSession = await response.json();
+    console.log('THIS IS THE SESSION AFTER OKAY RESPONSE: ', singleSession)
+    dispatch(loadOne(singleSession));
   };
 };
 
@@ -74,8 +75,8 @@ export const getDndSessionByHost = (hostId) => async dispatch => {
   const response = await csrfFetch(`/api/host/${hostId}`);
 
   if (response.ok) {
-    const session = await response.json();
-    dispatch(load(session));
+    const list = await response.json();
+    dispatch(load(list));
   };
 };
 
@@ -110,7 +111,8 @@ const dndSessionReducer = (state = initialState, action) => {
         ...state,
       };
     case LOAD_ONE:
-      newState = action.session;
+      console.log("THIS IS THE REDUCER: ", action.singleSession)
+      newState = { ...action.singleSession };
       return newState;
     case ADD_ONE:
       newState = Object.assign({}, state);
