@@ -8,7 +8,7 @@ function SingleSession() {
   const dispatch = useDispatch();
   const { sessionId } = useParams();
   const sessionUser = useSelector(state => state.session.user);
-  const singleSession = useSelector(state => state.dndsession);
+  const singleSession = useSelector(state => state.dndsession[sessionId]);
 
   useEffect(() => {
     dispatch(getDndSingleSession(sessionId));

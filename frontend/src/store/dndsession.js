@@ -13,10 +13,10 @@ const load = list => ({
   list,
 });
 
-const loadOne = singleSession => ({
-  type: LOAD_ONE,
-  singleSession,
-});
+// const loadOne = singleSession => ({
+//   type: LOAD_ONE,
+//   singleSession,
+// });
 
 const addOneDndSession = dndsession => ({
   type: ADD_ONE,
@@ -42,7 +42,7 @@ export const getDndSingleSession = (sessionId) => async dispatch => {
 
   if (response.ok) {
     const singleSession = await response.json();
-    dispatch(loadOne(singleSession));
+    dispatch(addOneDndSession(singleSession));
   };
 };
 
@@ -101,9 +101,9 @@ const dndSessionReducer = (state = initialState, action) => {
         ...alldndsessions,
         ...state,
       };
-    case LOAD_ONE:
-      newState = { ...action.singleSession };
-      return newState;
+    // case LOAD_ONE:
+    //   newState = { ...action.singleSession };
+    //   return newState;
     case ADD_ONE:
       newState = Object.assign({}, state);
       newState[action.dndsession.id] = action.dndsession;
