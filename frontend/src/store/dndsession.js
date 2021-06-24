@@ -18,8 +18,9 @@ const addOneDndSession = dndsession => ({
   dndsession,
 });
 
-const removeDndSession = () => ({
-  type: DELETE_SESSION
+const removeDndSession = id => ({
+  type: DELETE_SESSION,
+  id,
 });
 
 // const setdndsession = (dndsession) => {
@@ -36,12 +37,13 @@ const removeDndSession = () => ({
 //   };
 // };
 
-export const deleteDndSession = async (id) => {
-  const response = await csrfFetch(`api/host/sessions/${id}`)
+export const deleteDndSession = (id) => async dispatch => {
+  const response = await csrfFetch(`api/host/sessions/${id}`, {
+    method: 'DELETE',
+  })
 
-  return {
-    type: DELETE_SESSION,
-  };
+  dispatch(removeDndSession(id));
+  return response;
 };
 
 // const getdndsession = (dndsession) => {

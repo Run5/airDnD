@@ -46,16 +46,25 @@ function Hosting() {
         {Object.keys(dndSessions).map((sessionId) => {
           return (
             <NavLink key={sessionId} to={`/sessions/${sessionId}`}>
-              <div className=''>
+              <div className='HostedSessionsContainer'>
                 <h1>{dndSessions[sessionId].name}</h1>
-                <div className="HostedSessionsMap" style={{ backgroundImage: `url('${dndSessions[sessionId].map}')` }}>
+                <div
+                  className="HostedSessionsMap"
+                  style={{ backgroundImage: `url('${dndSessions[sessionId].map}')` }}
+                >
 
                 </div>
                 <div>
 
                 </div>
                 <div className='HostedSessionsRemove'>
-                  <button type='button' onClick={handleRemoveButtonClick(sessionId)} className='HostedSessionsRemoveButton'>Remove</button>
+                  <button
+                    type='button'
+                    onClick={handleRemoveButtonClick}
+                    className='HostedSessionsRemoveButton'
+                  >
+                    Remove
+                  </button>
                 </div>
               </div>
             </NavLink>
