@@ -3,7 +3,6 @@ const asyncHandler = require('express-async-handler');
 const { check } = require('express-validator');
 
 const { Session } = require('../../db/models');
-const SessionRepository = require('../../db/sessions-repository')
 const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
@@ -56,17 +55,10 @@ router.patch(
       public: isPublic,
       in_person: inPerson
     });
-
-    // return res.json({
-    //   session,
-    // });
-
-
-    // const id = await SessionRepository.update(req.body);
-    // const session = await SessionRepository.one(id);
     return res.json(session);
   }),
 );
+
 router.get(
   '/all',
   asyncHandler(async (req, res) => {
@@ -107,6 +99,5 @@ router.delete(
     return res.json({ sessionId })
   }),
 );
-
 
 module.exports = router;

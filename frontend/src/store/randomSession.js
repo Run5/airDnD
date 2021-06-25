@@ -2,8 +2,8 @@
 import { csrfFetch } from './csrf';
 
 
-const LOAD = 'host/LOAD';
-const ADD_ONE = 'host/ADD_ONE';
+const LOAD = 'random/LOAD';
+const ADD_ONE = 'random/ADD_ONE';
 
 
 const loadAll = list => ({
@@ -33,8 +33,8 @@ const randomSessionReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD:
       const alldndsessions = {};
-      action.list.forEach(dndsession => {
-        alldndsessions[dndsession.id] = dndsession;
+      action.list.forEach(singleSessionFromAll => {
+        alldndsessions[singleSessionFromAll.id] = singleSessionFromAll;
       });
       return {
         ...alldndsessions,

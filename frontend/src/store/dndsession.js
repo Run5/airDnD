@@ -3,7 +3,6 @@ import { csrfFetch } from './csrf';
 
 
 const LOAD = 'host/LOAD';
-const LOAD_ONE = 'host/LOAD_ONE'
 const ADD_ONE = 'host/ADD_ONE';
 const DELETE_SESSION = 'host/DELETE_SESSION';
 
