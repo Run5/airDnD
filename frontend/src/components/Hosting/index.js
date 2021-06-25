@@ -66,17 +66,22 @@ function Hosting({ nav }) {
 
       </div>
       {(userIsHost) ?
-      <div className='HostingPageYourSessions'>
-        {Object.keys(dndSessions).map((sessionId) => {
-          if(dndSessions[sessionId]?.host_id === sessionUser?.id) {
-            return (
-              <NavLink key={sessionId} to={`/sessions/${sessionId}`}>
-                <SessionCard sessionId={ sessionId }/>
-              </NavLink>
-            );
-          }//endIF
-        })}
-      </div> :
+      <>
+        <div classList='HostingPageYourSessionsTitle'>
+          <h1>Here is all the sessions you're currently hosting: </h1>
+        </div>
+        <div className='HostingPageYourSessions'>
+          {Object.keys(dndSessions).map((sessionId) => {
+            if(dndSessions[sessionId]?.host_id === sessionUser?.id) {
+              return (
+                <NavLink key={sessionId} to={`/sessions/${sessionId}`}>
+                  <SessionCard sessionId={ sessionId }/>
+                </NavLink>
+              );
+            }//endIF
+          })}
+        </div>
+      </> :
       null
       }
       <div className='HostingPageIdeas'>
@@ -84,14 +89,14 @@ function Hosting({ nav }) {
       </div>
       <div className='HostingPageFooterContainer'>
         <div className='HostingPageFooter'>
-          <div
+          <NavLink to={`/sessions/${allSessions[randomIdTwo?.id]?.id}`}
             className='HostingPageExample'
             style={{ backgroundImage: `url('${allSessions[randomIdTwo?.id]?.map}')` }}
           >
             <div className='HostingPageExampleName'>
               {allSessions[randomIdTwo?.id]?.name}
             </div>
-          </div>
+          </NavLink>
           <div className='HostingPageOutro'>
             <h1>Try hosting a session on Airdnd</h1>
             <h2>Join us. We'll help you every step of the way.</h2>

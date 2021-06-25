@@ -11,7 +11,7 @@ function SessionCard({ sessionId }) {
   return (
     <>
       <div className='HostedSessionsContainer'>
-        <h1>{dndSessions[sessionId]?.name}</h1>
+        <h1 className='HostedSessionsName'>{dndSessions[sessionId]?.name}</h1>
         <div
           className="HostedSessionsMap"
           style={{ backgroundImage: `url('${dndSessions[sessionId]?.map}')` }}
