@@ -11,22 +11,23 @@ import SingleSession from "./components/SingleSession"
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+  const [showNav, setShowNav] = useState(true);
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
   return (
     <>
-      <Navigation isLoaded={isLoaded} />
+      <Navigation isLoaded={isLoaded} nav={ showNav }/>
       <Switch>
         <Route exact path='/'>
-          <Landing />
+          <Landing nav={() => setShowNav(true)}/>
         </Route>
         <Route exact path='/host'>
-          <Hosting />
+          <Hosting nav={() => setShowNav(false)}/>
         </Route>
         <Route path='/sessions/:sessionId'>
-          <SingleSession />
+          <SingleSession nav={() => setShowNav(true)}/>
         </Route>
       </Switch>
     </>

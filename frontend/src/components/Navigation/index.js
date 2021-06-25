@@ -9,7 +9,7 @@ import * as sessionActions from '../../store/session';
 import { d20, userIcon, barsIcon, searchIcon } from '../icons';
 import './Navigation.css';
 
-function Navigation({ isLoaded }){
+function Navigation({ isLoaded, nav }){
   const sessionUser = useSelector(state => state.session.user);
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
@@ -20,55 +20,61 @@ function Navigation({ isLoaded }){
   };
 
   return (
-    <nav className='NavigationContainer'>
-      <div className='NavHome'>
-        <NavLink exact to='/'>{d20} airdnd</NavLink>
-      </div>
-      <div className='NavSearchBar'>
-        <div className='NavSearch'>
-          Start your search
+    <>
+      {(nav) ?
+      <nav className='NavigationContainer'>
+        <div className='NavHome'>
+          <NavLink exact to='/'>{d20} airdnd</NavLink>
         </div>
-        <button type='button' className='NavSearchButton'>
-          {searchIcon}
-        </button>
-      </div>
-      <div className='NavRightContainer'>
-        <div className='NavBecomeHost'>
-          <NavLink className='NavHostButton' to='/host'>
-            Become a host
-          </NavLink>
-        </div>
-        <div className='NavLoginSignup'>
-          <button
-            type='button'
-            className='NavProfileButton'
-            onClick={() => {
-              const menu = document.querySelector('.profile-dropdown');
-              if(!showMenu){
-                menu.classList.remove('hidden')
-                setShowMenu(true);
-              } else {
-                menu.classList.add('hidden')
-                setShowMenu(false);
-              }
-            }}
-          >
-            {barsIcon}&ensp;{userIcon}
+        <div className='NavSearchBar'>
+          <div className='NavSearch'>
+            Start your search
+          </div>
+          <button type='button' className='NavSearchButton'>
+            {searchIcon}
           </button>
-          {isLoaded && (sessionUser) ?
-            <ul className="profile-dropdown hidden">
-              <li>{sessionUser.username}</li>
-              <li>{sessionUser.email}</li>
-              <li><HostingFormModal btnTxt={'Start Hosting'}/></li>
-              <li><button onClick={logout}>Log Out</button></li>
-            </ul> :
-            <ul className="profile-dropdown hidden">
-              <li><LoginFormModal setShowMenu={ setShowMenu }/></li>
-              <li><SignupFormModal setShowMenu={ setShowMenu }/></li>
-            </ul>}
         </div>
-      </div>
-    </nav>
+        <div className='NavRightContainer'>
+          <div className='NavBecomeHost'>
+            <NavLink className='NavHostButton' to='/host'>
+              Become a host
+            </NavLink>
+          </div>
+          <div className='NavLoginSignup'>
+            <button
+              type='button'
+              className='NavProfileButton'
+              onClick={() => {
+                const menu = document.querySelector('.profile-dropdown');
+                if(!showMenu){
+                  menu.classList.remove('hidden')
+                  setShowMenu(true);
+                } else {
+                  menu.classList.add('hidden')
+                  setShowMenu(false);
+                }
+              }}
+            >
+              {barsIcon}&ensp;{userIcon}
+            </button>
+            {isLoaded && (sessionUser) ?
+              <ul className="profile-dropdown hidden">
+                <li>{sessionUser.username}</li>
+                <li>{sessionUser.email}</li>
+                <li><HostingFormModal btnTxt={'Start Hosting'}/></li>
+                <li><button className='LogoutButton' onClick={logout}>Log Out</button></li>
+              </ul> :
+              <ul className="profile-dropdown hidden">
+                <li><LoginFormModal setShowMenu={ setShowMenu }/></li>
+                <li><SignupFormModal setShowMenu={ setShowMenu }/></li>
+              </ul>}
+          </div>
+        </div>
+      </nav> :
+      <div className='NavHomeInvisible'>
+        <NavLink exact to='/'>{d20}</NavLink>
+      </div>}
+    </>
   );
 }
 

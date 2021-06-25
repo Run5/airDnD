@@ -1,18 +1,34 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import HostingFormModal from '../HostingFormModal';
-// import ExampleHost from './ExampleHost';
 import { getDndSessionByHost,  deleteDndSession } from '../../store/dndsession';
 import './Hosting.css';
+import { getAllDndSessions } from '../../store/randomSession';
+import SessionCard from '../SessionCard';
 
-function Hosting() {
+function Hosting({ nav }) {
+  nav();
   const dispatch = useDispatch();
-  const dndSessions = useSelector(state => {
-    return state.dndsession;
-  });
-  const sessionUser = useSelector((state) => state.session.user);
+  const [userIsHost, setUserIsHost] = useState(false)
+  const dndSessions = useSelector(state => state.dndsession);
+  const allSessions = useSelector(state => state.allSessions);
+  const sessionUser = useSelector(state => state.session.user);
+  const allSessionsArray = Object.keys(allSessions);
+  function randomNum(num) {
+    return Math.floor(Math.random() * num) + 1;
+  }
+  const randomIndex = randomNum(allSessionsArray.length - 1);
+  const randomIdOne = allSessions[allSessionsArray[randomIndex]];
+  const randomIndex2 = randomNum(allSessionsArray.length - 1);
+  const randomIdTwo = allSessions[allSessionsArray[randomIndex2]];
+  const setHostFunction = () => {
+    Object.keys(dndSessions).map((sessionId) => ((dndSessions[sessionId]?.host_id === sessionUser?.id) ? setUserIsHost(true) : null))
+  };
 
+  useEffect(() => {
+    setHostFunction();
+  }, [])
 
   useEffect(() => {
 
@@ -20,62 +36,68 @@ function Hosting() {
 
   }, [dispatch, sessionUser])
 
+  useEffect(() => {
+
+    dispatch(getAllDndSessions());
+
+  }, [dispatch])
+
   return (
     <div className='HostingPage'>
-      <div className='HostingPageHeader'>
-        <div className='HostingPageIntro'>
-          Hosting makes Airdnd, Airdnd
+      <div className='HostingPageHeaderContainer'>
+        <div className='HostingPageHeader'>
+          <div className='HostingPageIntro'>
+            <h1>Hosting makes Airdnd, Airdnd</h1>
+          </div>
+          <NavLink to={`/sessions/${allSessions[randomIdOne?.id]?.id}`}
+            className='HostingPageExample'
+            style={{ backgroundImage: `url('${allSessions[randomIdOne?.id]?.map}')` }}
+          >
+            <div className='HostingPageExampleName'>
+              {allSessions[randomIdOne?.id]?.name}
+            </div>
+          </NavLink>
         </div>
-        <div className='HostingPageExample'>
-          This will be an example session
-          {/* <ExampleHost /> */}
+        <div className='HostingFormButton'>
+          <HostingFormModal btnTxt={"Try Hosting"} />
         </div>
       </div>
       <div className='HostingPageHostAnything'>
 
       </div>
+      {(userIsHost) ?
       <div className='HostingPageYourSessions'>
         {Object.keys(dndSessions).map((sessionId) => {
-          return (
-            <NavLink key={sessionId} to={`/sessions/${sessionId}`}>
-              <div className='HostedSessionsContainer'>
-                <h1>{dndSessions[sessionId]?.name}</h1>
-                <div
-                  className="HostedSessionsMap"
-                  style={{ backgroundImage: `url('${dndSessions[sessionId]?.map}')` }}
-                >
-
-                </div>
-                <div>
-
-                </div>
-                <div className='HostedSessionsRemove'>
-                  <button
-                    type='button'
-                    onClick={(e) => {
-                      e.preventDefault();
-                      dispatch(deleteDndSession(sessionId));
-                    }}
-                    className='HostedSessionsRemoveButton'
-                  >
-                    Remove
-                  </button>
-                </div>
-              </div>
-            </NavLink>
-          );
+          if(dndSessions[sessionId]?.host_id === sessionUser?.id) {
+            return (
+              <NavLink key={sessionId} to={`/sessions/${sessionId}`}>
+                <SessionCard sessionId={ sessionId }/>
+              </NavLink>
+            );
+          }//endIF
         })}
-      </div>
+      </div> :
+      null
+      }
       <div className='HostingPageIdeas'>
 
       </div>
-      <div className='HostingPageFooter'>
-        <div className='HostingPageExample'>
-          This will be an example session
+      <div className='HostingPageFooterContainer'>
+        <div className='HostingPageFooter'>
+          <div
+            className='HostingPageExample'
+            style={{ backgroundImage: `url('${allSessions[randomIdTwo?.id]?.map}')` }}
+          >
+            <div className='HostingPageExampleName'>
+              {allSessions[randomIdTwo?.id]?.name}
+            </div>
+          </div>
+          <div className='HostingPageOutro'>
+            <h1>Try hosting a session on Airdnd</h1>
+            <h2>Join us. We'll help you every step of the way.</h2>
+          </div>
         </div>
-        <div className='HostingPageOutro'>
-          Try hosting a session on Airdnd
-          <p>Join us. We'll help you every step of the way.</p>
+        <div className='HostingFormButton'>
           <HostingFormModal btnTxt={"Let's go!"} />
         </div>
       </div>

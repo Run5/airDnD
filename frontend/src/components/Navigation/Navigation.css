@@ -17,6 +17,20 @@
   margin-left: 100px;
 }
 
+.NavHomeInvisible {
+  color: pink;
+  position: absolute;
+  font-size: 35px;
+  margin-top: 40px;
+  margin-left: 50px;
+  z-index: 1;
+}
+
+.NavHomeInvisible > a {
+  text-decoration: none;
+  color: white;
+}
+
 .NavHome > a{
   text-decoration: none;
   color: white;
@@ -88,6 +102,8 @@
 
 .profile-dropdown {
   position: absolute;
+  height: 300px;
+  width: 200px;
   z-index: 1;
   color: white;
   background-color: var(--darkBlue);
@@ -100,4 +116,26 @@
 
 .hidden {
   display: none;
+}
+
+.LogoutButton {
+  width: 80px;
+  height: 40px;
+  font-size: 1em;
+  border-radius: 8px;
+  margin: 0 auto;
+  background-color: #e25f6a;
+  color: white;
+  border: 2px solid #e25f6a;
+  font-weight: bold;
+  position: absolute;
+  bottom: 25px;
+  right: 135px;
+}
+
+.LogoutButton:hover {
+  transition: all 0.4s ease 0s;
+  color: #e25f6a;
+  background-color: white;
+  cursor: pointer;
 }

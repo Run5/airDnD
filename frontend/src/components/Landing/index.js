@@ -4,7 +4,8 @@ import { NavLink } from 'react-router-dom';
 // import { useSelector } from 'react-redux';
 import './Landing.css';
 
-function Landing() {
+function Landing({ nav }) {
+  nav();
 
   return (
     <div className='LandingPage'>

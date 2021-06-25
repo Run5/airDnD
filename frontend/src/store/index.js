@@ -2,11 +2,13 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import sessionReducer from './session';
 import dndSessionReducer from "./dndsession";
+import randomSessionReducer from "./randomSession";
 
 const rootReducer = combineReducers({
   // add reducer functions here
   session: sessionReducer,
-  dndsession: dndSessionReducer
+  dndsession: dndSessionReducer,
+  allSessions: randomSessionReducer
 });
 
 let enhancer;

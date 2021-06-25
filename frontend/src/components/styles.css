@@ -6,11 +6,15 @@
   --brightBlue: #758ea7;
   --greyBlue: #4d5c6b;
   --grey: #606066;
-  /* also using: white, darkred(errors) */
+  /* also using: white, darkred(errors) #e25f6a(some btns)*/
 }
 
 html, body, h1, h3{
   margin:0;
   padding:0;
   font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+}
+
+body {
+  background-color: var(--darkBlue);
 }

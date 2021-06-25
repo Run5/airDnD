@@ -2,16 +2,17 @@
 import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
 import HostingFormEdit from './HostingFormEdit';
+import './HostingFormEdit.css';
 
-function HostingFormEditModal({ btnTxt }) {
+function HostingFormEditModal({ btnTxt, sessionId }) {
   const [showModal, setShowModal] = useState(false);
 
   return (
     <>
-      <button onClick={() => setShowModal(true)}>{btnTxt}</button>
+      <button className='HostingFormActualButton' onClick={() => setShowModal(true)}>{btnTxt}</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <HostingFormEdit />
+          <HostingFormEdit sessionId={ sessionId }/>
         </Modal>
       )}
     </>

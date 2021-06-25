@@ -6,10 +6,10 @@ import * as sessionActions from "../../store/dndsession";
 import { errIcon } from '../icons';
 import './HostingFormEdit.css';
 
-function HostingFormEdit() {
+function HostingFormEdit({ sessionId }) {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
-  const singleSession = useSelector((state) => state.dndsession);
+  const singleSession = useSelector((state) => state.dndsession[sessionId]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [location, setLocation] = useState("");
@@ -36,7 +36,7 @@ function HostingFormEdit() {
   return (
     <div className='HostingFormEditContainer'>
       <h3 className='HostingFormEditTitle'>
-        Host a Session
+        Edit your session
       </h3>
       <form className='HostingFormEdit' onSubmit={handleSubmit}>
         { (errors.length > 0) ? <ul className='HostingFormEditErrors'>{errors.map((error, idx) => <li key={idx}>{errIcon} {error}</li>)}</ul> : null }

@@ -67,7 +67,13 @@ router.patch(
     return res.json(session);
   }),
 );
-
+router.get(
+  '/all',
+  asyncHandler(async (req, res) => {
+    const sessions = await Session.findAll();
+    return res.json(sessions);
+  }),
+);
 
 router.get(
   '/:hostId(\\d+)',

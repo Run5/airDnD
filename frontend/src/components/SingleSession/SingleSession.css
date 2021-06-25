@@ -1,0 +1,89 @@
+@import '../styles.css';
+
+body {
+  background-color: var(--brightBlue);
+}
+
+.SingleSessionContainer {
+  background-color: var(--brightBlue);
+  position: absolute;
+  top: 80px;
+  height: 100vh;
+  width: 100%;
+  z-index: -1;
+  display: flex;
+  justify-content: center;
+
+}
+
+.SingleSessionWrapper {
+  height: 50%;
+  width: 50%;
+  background-color: var(--darkBlue);
+  color: white;
+  position: absolute;
+  display: flex;
+  padding: 20px;
+}
+
+.SingleSessionInfo {
+  width: 50%;
+  height: 100%;
+  padding: 20px;
+}
+
+.SingleSessionMap {
+  width: 50%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.SingleSessionName {
+
+}
+
+.HostingFormActualButton,
+.SingleSessionRemoveButton,
+.SingleSessionJoinButton {
+  width: 110px;
+  height: 40px;
+  font-size: 1em;
+  border-radius: 8px;
+  margin: 0 auto;
+  background-color: #e25f6a;
+  color: white;
+  border: 2px solid #e25f6a;
+  font-weight: bold;
+  position: absolute;
+  bottom: 25px;
+  right: 25px;
+}
+
+.SingleSessionRemoveButton {
+  right: 145px;
+}
+
+.SingleSessionJoinButton {
+  width: 200px;
+}
+
+.HostingFormActualButton:hover,
+.SingleSessionRemoveButton:hover,
+.SingleSessionJoinButton:hover {
+  transition: all 0.4s ease 0s;
+  color: #e25f6a;
+  background-color: white;
+  cursor: pointer;
+}
+
+.SingleSessionReviewsContainer {
+  position: absolute;
+  top: 530px;
+  height: 2000px;
+  width: 50%;
+  padding: 20px;
+  background-color: var(--darkBlue);
+  color: white;
+  margin-bottom: 50px;
+}
