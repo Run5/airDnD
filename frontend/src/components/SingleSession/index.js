@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import { getDndSingleSession, deleteDndSession } from '../../store/dndsession'
+import { getPartyBySession, deleteDndParty } from "../../store/partyStore";
 import HostingFormEditModal from "../HostingFormEditModal";
 import './SingleSession.css';
 
@@ -13,11 +14,13 @@ function SingleSession({ nav }) {
   const { sessionId } = useParams();
   const sessionUser = useSelector(state => state.session.user);
   const singleSession = useSelector(state => state.dndsession[sessionId]);
+  const sessionParty = useSelector(state => state.party[sessionId]);
 
   let history = useHistory();
 
   useEffect(() => {
     dispatch(getDndSingleSession(sessionId));
+    dispatch(getPartyBySession(sessionId));
   }, [dispatch])
 
   return (
@@ -37,13 +40,14 @@ function SingleSession({ nav }) {
           className='SingleSessionMap'
           style={{ backgroundImage: `url('${singleSession?.map}')` }}
         ></div>
-        {(sessionUser && singleSession.host_id === sessionUser.id) ? <div>
+        {(sessionUser && singleSession?.host_id === sessionUser?.id) ? <div>
           <HostingFormEditModal btnTxt={ 'edit' } sessionId={ sessionId }/>
           <button
             type='button'
-            onClick={(e) => {
+            onClick={async (e) => {
               e.preventDefault();
-              dispatch(deleteDndSession(singleSession.id));
+              await dispatch(deleteDndParty(sessionId));
+              await dispatch(deleteDndSession(sessionId));
               history.push('/host')
             }}
             className='SingleSessionRemoveButton'

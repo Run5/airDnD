@@ -62,9 +62,6 @@ router.delete(
   '/session/:id(\\d+)',
   asyncHandler(async (req, res) => {
     const { id } = req.params;
-    // const slots = await Party_member.findAll({
-    //   where: {session_id: id}
-    // });
     await Party_member.destroy({
       where: {
         session_id: id

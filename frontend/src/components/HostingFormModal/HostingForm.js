@@ -4,10 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/dndsession";
 import { createDndParty } from "../../store/partyStore";
+import { addOneRandomSession } from "../../store/randomSession";
 import { errIcon } from '../icons';
 import './HostingForm.css';
 
-function HostingForm() {
+function HostingForm({ setShowModal }) {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const [name, setName] = useState("");
@@ -31,12 +32,19 @@ function HostingForm() {
 
     if(!res1) throw new Error('Failed to create session');
 
+    dispatch(addOneRandomSession(res1))
+
     const sessionId = res1.id;
+
+    // NOTE: could refactor by doing most of this work on the back
 
     const res2 = await dispatch(createDndParty(sessionId, party))
 
     if(!res2) throw new Error('Failed to create party');
-    else return [res1, res2];
+
+    setShowModal(false);
+
+    return [res1, res2];
 
   };
 

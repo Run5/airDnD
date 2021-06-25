@@ -11,8 +11,10 @@ function HostingFormModal({ btnTxt }) {
     <>
       <button className='HostingFormActualButton' onClick={() => setShowModal(true)}>{btnTxt}</button>
       {showModal && (
-        <Modal onClose={() => setShowModal(false)}>
-          <HostingForm />
+        <Modal
+          onClose={() => setShowModal(false)}
+        >
+          <HostingForm setShowModal={ setShowModal }/>
         </Modal>
       )}
     </>

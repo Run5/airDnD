@@ -6,6 +6,7 @@ import { getDndSessionByHost,  deleteDndSession } from '../../store/dndsession';
 import './Hosting.css';
 import { getAllDndSessions } from '../../store/randomSession';
 import SessionCard from '../SessionCard';
+import { PURGE } from '../../store/partyStore';
 
 function Hosting({ nav }) {
   nav();
@@ -22,25 +23,26 @@ function Hosting({ nav }) {
   const randomIdOne = allSessions[allSessionsArray[randomIndex]];
   const randomIndex2 = randomNum(allSessionsArray.length - 1);
   const randomIdTwo = allSessions[allSessionsArray[randomIndex2]];
-  const setHostFunction = () => {
-    Object.keys(dndSessions).map((sessionId) => ((dndSessions[sessionId]?.host_id === sessionUser?.id) ? setUserIsHost(true) : null))
-  };
+
+  function isEmpty(obj) {
+    return Object.keys(obj).length === 0;
+  }
+
+  useEffect(async () => {
+
+    if(!isEmpty(dndSessions)) setUserIsHost(true);
+    if(isEmpty(dndSessions)) setUserIsHost(false);
+
+  }, [dndSessions])
+
 
   useEffect(() => {
-    setHostFunction();
-  }, [])
 
-  useEffect(() => {
-
+    dispatch({ type: PURGE })
     if(sessionUser) dispatch(getDndSessionByHost(sessionUser.id));
-
-  }, [dispatch, sessionUser])
-
-  useEffect(() => {
-
     dispatch(getAllDndSessions());
 
-  }, [dispatch])
+  }, [dispatch, sessionUser])
 
   return (
     <div className='HostingPage'>
@@ -75,7 +77,7 @@ function Hosting({ nav }) {
             if(dndSessions[sessionId]?.host_id === sessionUser?.id) {
               return (
                 <NavLink key={sessionId} to={`/sessions/${sessionId}`}>
-                  <SessionCard sessionId={ sessionId }/>
+                  <SessionCard sessionId={ sessionId } setShowSessions={() => setUserIsHost(false)} />
                 </NavLink>
               );
             }//endIF
@@ -103,7 +105,7 @@ function Hosting({ nav }) {
           </div>
         </div>
         <div className='HostingFormButton'>
-          <HostingFormModal btnTxt={"Let's go!"} />
+          <HostingFormModal btnTxt={"Let's go!"} setShowSessions={() => setUserIsHost(true)} />
         </div>
       </div>
       <div className='HostingPageActualFooter'>

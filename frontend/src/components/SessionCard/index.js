@@ -1,11 +1,10 @@
 // frontend/src/components/SessionCard/index.js
-
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteDndSession } from '../../store/dndsession';
 import { deleteDndParty } from '../../store/partyStore';
 import './SessionCard.css';
 
-function SessionCard({ sessionId }) {
+function SessionCard({ sessionId, setShowSessions }) {
   const dispatch = useDispatch();
   const dndSessions = useSelector(state => state.dndsession);
 
@@ -16,12 +15,7 @@ function SessionCard({ sessionId }) {
         <div
           className="HostedSessionsMap"
           style={{ backgroundImage: `url('${dndSessions[sessionId]?.map}')` }}
-        >
-
-        </div>
-        <div>
-
-        </div>
+        ></div>
         <div className='HostedSessionsRemove'>
           <button
             type='button'

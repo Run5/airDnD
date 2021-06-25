@@ -1,9 +1,10 @@
 // frontend/src/store/ranodmSession.js
 import { csrfFetch } from './csrf';
+import { DELETE_SESSION, ADD_ONE } from './dndsession';
 
 
 const LOAD = 'random/LOAD';
-const ADD_ONE = 'random/ADD_ONE';
+const ADD_SESSION = 'random/ADD_SESSION'
 
 
 const loadAll = list => ({
@@ -11,11 +12,10 @@ const loadAll = list => ({
   list,
 });
 
-const addOneRandomSession = dndsession => ({
-  type: ADD_ONE,
+export const addOneRandomSession = dndsession => ({
+  type: ADD_SESSION,
   dndsession,
 });
-
 
 export const getAllDndSessions = () => async dispatch => {
   const response = await csrfFetch(`/api/host/all`);
@@ -23,6 +23,22 @@ export const getAllDndSessions = () => async dispatch => {
   if (response.ok) {
     const list = await response.json();
     dispatch(loadAll(list));
+  };
+};
+
+export const createSession = (payload) => async dispatch => {
+  const response = await csrfFetch(`/api/host/`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload),
+  })
+
+  if (response.ok) {
+    const dndsession = await response.json();
+    dispatch(addOneRandomSession(dndsession));
+    return dndsession;
   };
 };
 
@@ -40,9 +56,13 @@ const randomSessionReducer = (state = initialState, action) => {
         ...alldndsessions,
         ...state,
       };
-    case ADD_ONE:
+    case ADD_SESSION:
       newState = Object.assign({}, state);
       newState[action.dndsession.id] = action.dndsession;
+      return newState;
+    case DELETE_SESSION:
+      newState = { ...state }
+      delete newState[action.id];
       return newState;
     default:
       return state;
