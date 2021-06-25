@@ -3,12 +3,14 @@ import thunk from "redux-thunk";
 import sessionReducer from './session';
 import dndSessionReducer from "./dndsession";
 import randomSessionReducer from "./randomSession";
+import dndPartyReducer from './partyStore';
 
 const rootReducer = combineReducers({
   // add reducer functions here
   session: sessionReducer,
   dndsession: dndSessionReducer,
-  allSessions: randomSessionReducer
+  allSessions: randomSessionReducer,
+  party: dndPartyReducer,
 });
 
 let enhancer;

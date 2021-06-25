@@ -100,7 +100,6 @@ const dndSessionReducer = (state = initialState, action) => {
       newState[action.dndsession.id] = action.dndsession;
       return newState;
     case DELETE_SESSION:
-      console.log('THIS IS THE STATE IN THE REDUCER: ', state)
       newState = { ...state }
       delete newState[action.id];
       return newState;

@@ -2,6 +2,7 @@
 
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteDndSession } from '../../store/dndsession';
+import { deleteDndParty } from '../../store/partyStore';
 import './SessionCard.css';
 
 function SessionCard({ sessionId }) {
@@ -24,9 +25,10 @@ function SessionCard({ sessionId }) {
         <div className='HostedSessionsRemove'>
           <button
             type='button'
-            onClick={(e) => {
+            onClick={async (e) => {
               e.preventDefault();
-              dispatch(deleteDndSession(sessionId));
+              await dispatch(deleteDndParty(sessionId));
+              await dispatch(deleteDndSession(sessionId));
             }}
             className='HostedSessionsRemoveButton'
           >

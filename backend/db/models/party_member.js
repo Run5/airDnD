@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Party_member.associate = function(models) {
     // associations can be defined here
-    Party_member.belongsTo(models.Character, { foreignKey: 'charcter_id' });
+    Party_member.belongsTo(models.Character, { foreignKey: 'character_id' });
     Party_member.belongsTo(models.Session, { foreignKey: 'session_id' });
   };
   return Party_member;

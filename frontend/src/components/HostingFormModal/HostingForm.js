@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/dndsession";
+import { createDndParty } from "../../store/partyStore";
 import { errIcon } from '../icons';
 import './HostingForm.css';
 
@@ -26,10 +27,16 @@ function HostingForm() {
 
     setErrors([]);
 
-    const res = await dispatch(sessionActions.createDndSession({ host_id, name, description, location, map, party, isPublic, inPerson }))
+    const res1 = await dispatch(sessionActions.createDndSession({ host_id, name, description, location, map, party, isPublic, inPerson }))
 
-    if(res) return res;
-    else throw new Error('Failed to create session');
+    if(!res1) throw new Error('Failed to create session');
+
+    const sessionId = res1.id;
+
+    const res2 = await dispatch(createDndParty(sessionId, party))
+
+    if(!res2) throw new Error('Failed to create party');
+    else return [res1, res2];
 
   };
 

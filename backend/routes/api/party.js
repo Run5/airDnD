@@ -12,16 +12,16 @@ router.post(
   asyncHandler(async (req, res) => {
     const { sessionId, partySize } = req.params;
 
-    const partyArray = []
+    const partyObj = {};
     for (let i = 0; i < partySize; i++) {
       const party = await Party_member.create({
         character_id: null,
         session_id: sessionId,
       });
-      partyArray.push(party)
+      partyObj[party.id] = party;
     }//endFor
 
-    return res.json(partyArray);
+    return res.json(partyObj);
   }),
 );
 
@@ -33,7 +33,7 @@ router.patch(
     if (!character) throw new Error('Cannot find character');
     const partyMemberSlot = await Party_member.findByPk(partyId);
     if (!partyMemberSlot) throw new Error('Cannot find a slot in this party');
-    const { charId } = req.body;
+
     if(charId === 0) {
       await partyMemberSlot.update({
         character_id: null
@@ -62,11 +62,13 @@ router.delete(
   '/session/:id(\\d+)',
   asyncHandler(async (req, res) => {
     const { id } = req.params;
-    const slots = await Party_member.findAll({
-      where: {session_id: id}
-    });
-    slots.array.forEach(async slot => {
-      await slot.destroy({ where: { id: slot.id } })
+    // const slots = await Party_member.findAll({
+    //   where: {session_id: id}
+    // });
+    await Party_member.destroy({
+      where: {
+        session_id: id
+      }
     });
     return res.json()
   }),
