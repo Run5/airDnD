@@ -7,6 +7,7 @@ import Navigation from "./components/Navigation";
 import Landing from "./components/Landing"
 import Hosting from "./components/Hosting"
 import SingleSession from "./components/SingleSession"
+import Profile from "./components/Profile";
 
 function App() {
   const dispatch = useDispatch();
@@ -28,6 +29,9 @@ function App() {
         </Route>
         <Route path='/sessions/:sessionId'>
           <SingleSession nav={() => setShowNav(true)}/>
+        </Route>
+        <Route path='/profile/:userId'>
+          <Profile />
         </Route>
       </Switch>
     </>

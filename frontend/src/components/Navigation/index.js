@@ -1,6 +1,6 @@
 // frontend/src/components/Navigation/index.js
-import React, { useState, useEffect } from "react";
-import { NavLink } from 'react-router-dom';
+import React, { useState } from "react";
+import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
@@ -13,10 +13,12 @@ function Navigation({ isLoaded, nav }){
   const sessionUser = useSelector(state => state.session.user);
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
+  let history = useHistory();
 
   const logout = (e) => {
     e.preventDefault();
     dispatch(sessionActions.logout());
+    history.push('/')
   };
 
   return (
@@ -61,6 +63,7 @@ function Navigation({ isLoaded, nav }){
               <ul className="profile-dropdown hidden">
                 <li>{sessionUser.username}</li>
                 <li>{sessionUser.email}</li>
+                <li><NavLink exact to={`/profile/${sessionUser.id}`}>Profile</NavLink></li>
                 <li><HostingFormModal btnTxt={'Start Hosting'}/></li>
                 <li><button className='LogoutButton' onClick={logout}>Log Out</button></li>
               </ul> :

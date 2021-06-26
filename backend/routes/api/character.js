@@ -43,14 +43,14 @@ router.patch(
     const { id } = req.params;
     const character = await Character.findByPk(id);
     if (!character) throw new Error('Cannot find character');
-    const { name, race, dndClass, level } = req.body;
-    await session.update({
+    const { name, myRace, dndClass, level } = req.body;
+    await character.update({
       name,
-      race,
+      race: myRace,
       class: dndClass,
       level,
     });
-    return res.json(session);
+    return res.json(character);
   }),
 );
 
@@ -62,6 +62,14 @@ router.get(
   }),
 );
 
+router.get(
+  '/mychars/:id(\\d+)',
+  asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    const characters = await Character.findAll({ where: { user_id: id } });
+    return res.json(characters);
+  }),
+);
 // router.get(
 //   '/:partyId(\\d+)',
 //   asyncHandler(async (req, res) => {
@@ -89,7 +97,7 @@ router.delete(
   asyncHandler(async (req, res) => {
     const id = req.params.id;
     const character = await Character.findByPk(id);
-    if (!character) throw new Error('Cannot find session');
+    if (!character) throw new Error('Cannot find character');
     const characterId = character.id;
     await Character.destroy({ where: { id: characterId } });
     return res.json({ characterId })

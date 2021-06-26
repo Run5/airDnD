@@ -24,7 +24,7 @@ function Hosting({ nav }) {
   const randomIndex2 = randomNum(allSessionsArray.length - 1);
   const randomIdTwo = allSessions[allSessionsArray[randomIndex2]];
 
-  function isEmpty(obj) {
+  const isEmpty = (obj) => {
     return Object.keys(obj).length === 0;
   }
 

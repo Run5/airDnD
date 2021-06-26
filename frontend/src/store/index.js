@@ -4,6 +4,7 @@ import sessionReducer from './session';
 import dndSessionReducer from "./dndsession";
 import randomSessionReducer from "./randomSession";
 import dndPartyReducer from './partyStore';
+import characterReducer from "./charStore";
 
 const rootReducer = combineReducers({
   // add reducer functions here
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   dndsession: dndSessionReducer,
   allSessions: randomSessionReducer,
   party: dndPartyReducer,
+  characters: characterReducer,
 });
 
 let enhancer;
