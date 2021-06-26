@@ -10,7 +10,6 @@ module.exports = {
       },
       character_id: {
         type: Sequelize.INTEGER,
-        allowNull: true,
         references: { model: 'Characters' },
       },
       session_id: {

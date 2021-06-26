@@ -26,14 +26,22 @@ router.post(
 );
 
 router.patch(
-  '/:partyId/:charId(\\d+)',
+  '/:partyId(\\d+)/:charId(\\d+)',
   asyncHandler(async (req, res) => {
-    const { partyId, charId } = req.params;
-    const character = await Character.findByPk(charId);
-    if (!character) throw new Error('Cannot find character');
+    let { partyId, charId } = req.params;
+    if(charId == 0) charId = null;
+    console.log( 'the IDs: ', partyId, charId )
+
+    if (charId) {
+      const character = await Character.findByPk(charId);
+      if (!character) throw new Error('Cannot find character');
+    }
+
     const partyMemberSlot = await Party_member.findByPk(partyId);
     if (!partyMemberSlot) throw new Error('Cannot find a slot in this party');
 
+
+    //NOTE: fix this later!
     if(charId === 0) {
       await partyMemberSlot.update({
         character_id: null
@@ -43,6 +51,9 @@ router.patch(
         character_id: charId
       });
     }
+
+    console.log(">>>>>>>>>>>>>>>>>updated slot:", partyMemberSlot)
+
     return res.json(partyMemberSlot);
   }),
 );

@@ -3,7 +3,6 @@ module.exports = (sequelize, DataTypes) => {
   const Party_member = sequelize.define('Party_member', {
     character_id: {
       type: DataTypes.INTEGER,
-      allowNull: true,
     },
     session_id: {
       type: DataTypes.INTEGER,

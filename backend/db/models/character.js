@@ -32,6 +32,7 @@ module.exports = (sequelize, DataTypes) => {
   Character.associate = function(models) {
     // associations can be defined here
     Character.belongsTo(models.User, { foreignKey: 'user_id' });
+    Character.hasMany(models.Party_member, { foreignKey: 'character_id' });
   };
   return Character;
 };

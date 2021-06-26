@@ -54,6 +54,23 @@ export const getPartyBySession = (sessionId) => async dispatch => {
   };
 };
 
+export const patchParty = (partyId, charId) => async dispatch => {
+  const payload = { char_id: charId }
+
+  const response = await csrfFetch(`/api/party/${partyId}/${charId}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload),
+  });
+
+  if (response.ok) {
+    const partySlot = await response.json();
+    dispatch(createParty(partySlot));
+    return partySlot;
+  };
+};
 const initialState = {};
 
 const dndPartyReducer = (state = initialState, action) => {
