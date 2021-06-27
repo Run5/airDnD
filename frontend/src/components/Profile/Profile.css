@@ -1,19 +1,84 @@
-.fab {
+@import '../styles.css';
+
+body {
+  margin-top: 80px;
+}
+
+.ProfileContainer {
+  display: flex;
+}
+
+.ProfileTitle {
+  margin: 30px;
+  width: 30%;
+}
+
+.CharacterWrapper {
+  display: flex;
+  padding: 5px;
+  background-color: var(--darkBlue);
+  color: white;
+  border-radius: 5px;
+  margin: 10px 0;
+  width: 700px;
+  justify-content: space-between;
+}
+
+.CharacterInfo {
+  display: flex;
+  justify-content: center;
   align-items: center;
-  background-color: orange;
-  border-radius: 50px;
-  bottom: 30px;
+  margin: 10px 20px;
+}
+
+.CharacterButton {
+  margin: 5px;
+  padding: 10px;
+  width: 100px;
+  height: 40px;
+  font-size: 1em;
+  border-radius: 8px;
+  background-color: #e25f6a;
+  color: white;
+  border: 2px solid #e25f6a;
+  font-weight: bold;
+}
+
+.CharWrap {
+  display: flex;
+}
+
+.CharacterButton:disabled {
+  transition: all 0.4s ease 0s;
+  color: #e25f6a;
+  background-color: white;
+  cursor: pointer;
+}
+
+.CharacterButton:hover {
+  transition: all 0.4s ease 0s;
+  color: #e25f6a;
+  background-color: white;
+  cursor: pointer;
+}
+
+.fab {
+  font-weight: bold;
+  align-items: center;
+  background-color: #e25f6a;
+  color: white;
+  border: 2px solid #e25f6a;
   box-shadow: 0 4px 6px rgb(0, 0, 0, 0.2);
   cursor: pointer;
   display: flex;
   justify-content: center;
   overflow: hidden;
-  position: fixed;
-  left: 200px;
   height: 50px;
-  width: 50px;
+  width: 200px;
   transition: box-shadow 0.5s, transform 0.25s;
   zoom: 1;
+  margin: 30px 0;
+  border-radius: 8px;
 }
 
 .fab.is-hidden {
@@ -22,12 +87,22 @@
 
 .fab:hover {
   box-shadow: 0 6px 8px rgb(0, 0, 0, 0.3);
+  transition: all 0.4s ease 0s;
+  color: #e25f6a;
+  background-color: white;
 }
 
 .fab span {
   transition: transform 0.5s;
 }
 
-.fab:active span {
-  transform: rotate(360deg);
+.CharFormWrapper {
+  background-color: var(--darkBlue);
+  width: 700px;
+  height: 50px;
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 5px;
 }

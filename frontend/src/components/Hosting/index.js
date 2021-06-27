@@ -39,7 +39,7 @@ function Hosting({ nav }) {
   useEffect(() => {
 
     dispatch({ type: PURGE })
-    if(sessionUser) dispatch(getDndSessionByHost(sessionUser.id));
+    dispatch(getDndSessionByHost(sessionUser?.id));
     dispatch(getAllDndSessions());
 
   }, [dispatch, sessionUser])
@@ -64,9 +64,9 @@ function Hosting({ nav }) {
           <HostingFormModal btnTxt={"Try Hosting"} />
         </div>
       </div>
-      <div className='HostingPageHostAnything'>
+      {/* <div className='HostingPageHostAnything'>
 
-      </div>
+      </div> */}
       {(userIsHost) ?
       <>
         <div classList='HostingPageYourSessionsTitle'>
@@ -86,9 +86,9 @@ function Hosting({ nav }) {
       </> :
       null
       }
-      <div className='HostingPageIdeas'>
+      {/* <div className='HostingPageIdeas'>
 
-      </div>
+      </div> */}
       <div className='HostingPageFooterContainer'>
         <div className='HostingPageFooter'>
           <NavLink to={`/sessions/${allSessions[randomIdTwo?.id]?.id}`}

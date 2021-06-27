@@ -34,7 +34,7 @@ function SingleSession({ nav }) {
     await dispatch(getDndSingleSession(sessionId));
     await dispatch(getPartyBySession(sessionId));
     if (sessionUser) await dispatch(getCharacters(sessionUser?.id));
-  }, [dispatch])
+  }, [dispatch, partyIsFull, isInParty, mySlot, showCharacters])
 
   useEffect(() => {
     if(sessionParty) {
@@ -89,16 +89,17 @@ function SingleSession({ nav }) {
             <button type='button' className={(showCharacters) ? 'SingleSessionJoinButtonDisabled' : 'SingleSessionJoinButton'} onClick={async (e) => {
               e.preventDefault();
               await dispatch(patchParty(mySlot, 0));
-              await dispatch(getPartyBySession(sessionId));
+              setIsInParty(false);
+              setFullParty(false)
             }}>
               Leave This Session
             </button> : (partyIsFull) ?
-              <div>
+              <div className='SessionIsFull'>
                 This Session is Full
               </div> :
-              <button type='button' className='SingleSessionJoinButton' onClick={(e) => {
+              <button type='button' className='SingleSessionJoinButton' onClick={async (e) => {
                 e.preventDefault();
-                setShowCharacters(!showCharacters)
+                setShowCharacters(!showCharacters);
               }}>
                 Join This Session
               </button>
@@ -112,17 +113,19 @@ function SingleSession({ nav }) {
           <div className='MyCharacters'>
             { Object.keys(myCharacters).map((charId) => {
               return (
-                <div>
-                  <div>{myCharacters[charId].name} the {myCharacters[charId].race} {myCharacters[charId].class}</div>
-                  <button type='button' onClick={async (e) => {
+                <div className='CharContainerJoin'>
+                  <div className='CharInfoJoin'>{myCharacters[charId].name} the {myCharacters[charId].race} {myCharacters[charId].class}</div>
+                  <button type='button' className='CharJoinButton' onClick={async (e) => {
                     e.preventDefault();
                     await dispatch(patchParty(partyEmptySlot, charId));
                     await dispatch(getPartyBySession(sessionId));
+                    setIsInParty(true);
+                    setShowCharacters(false);
                   }}>Join</button>
                 </div>
               )
             })}
-            <button type='button' onClick={(e) => {
+            <button type='button' className='CharCancelButton' onClick={(e) => {
               e.preventDefault();
               setShowCharacters(!showCharacters)
             }}>Cancel</button>

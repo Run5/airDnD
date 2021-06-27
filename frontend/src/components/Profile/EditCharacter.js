@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { patchCharacter } from '../../store/charStore';
+import './Profile.css';
 
 const EditCharacter = ({ hideForm, charId }) => {
   const dispatch = useDispatch();
@@ -42,7 +43,7 @@ const EditCharacter = ({ hideForm, charId }) => {
   };
 
   return (
-    <section className=''>
+    <section className='CharFormWrapper'>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -68,8 +69,8 @@ const EditCharacter = ({ hideForm, charId }) => {
           required
           value={level}
           onChange={updateLevel} />
-        <button type="submit">Edit Character</button>
-        <button type="button" onClick={handleCancelClick}>Cancel</button>
+        <button type="submit" className='CharacterButton'>Edit</button>
+        <button type="button" className='CharacterButton' onClick={handleCancelClick}>Cancel</button>
       </form>
     </section>
   );

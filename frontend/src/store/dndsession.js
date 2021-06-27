@@ -92,8 +92,7 @@ const dndSessionReducer = (state = initialState, action) => {
         alldndsessions[dndsession.id] = dndsession;
       });
       return {
-        ...alldndsessions,
-        ...state,
+        ...alldndsessions
       };
     case ADD_ONE:
       newState = Object.assign({}, state);

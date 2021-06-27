@@ -63,7 +63,7 @@ function Navigation({ isLoaded, nav }){
               <ul className="profile-dropdown hidden">
                 <li>{sessionUser.username}</li>
                 <li>{sessionUser.email}</li>
-                <li><NavLink exact to={`/profile/${sessionUser.id}`}>Profile</NavLink></li>
+                <li><NavLink exact to={`/profile/${sessionUser.id}`} >View My Profile</NavLink></li>
                 <li><HostingFormModal btnTxt={'Start Hosting'}/></li>
                 <li><button className='LogoutButton' onClick={logout}>Log Out</button></li>
               </ul> :

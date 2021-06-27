@@ -1,5 +1,9 @@
 @import "../styles.css";
 
+body {
+  margin-top: 80px;
+}
+
 .LandingHeader {
   background-image: url('../images/knight-landing-page.jpg');
   background-repeat: no-repeat;
@@ -53,5 +57,30 @@
 }
 
 .LandingExploreNearby {
-  height: 2000px;
+  background-color: black;
+  height: 100vh;
+}
+
+.AllSessions {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  overflow-y: auto;
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+
+.SessionMap {
+  background-size: cover;
+  height: 400px;
+  width: 400px;
+  margin: 20px;
+  border-radius: 5px;
+}
+
+.NearYouTitle > h2{
+  margin: 0;
+  padding: 20px;
+  color: white;
+  text-align: center;
+  font-weight: normal;
+  font-family: Luminari, fantasy, cursive;
 }

@@ -86,7 +86,10 @@ const dndPartyReducer = (state = initialState, action) => {
         ...state,
       };
     case ADD:
-      newState = { ...state, ...action.dndparty }
+      console.log(">>>>>>>>>>>>>", action.party)
+      newState = { ...state }
+      newState = action.party
+      console.log('new state: ', newState)
       return newState;
     case DELETE:
       newState = {};

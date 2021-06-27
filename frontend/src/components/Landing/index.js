@@ -1,11 +1,20 @@
 // frontend/src/components/Landing/index.js
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-// import { useSelector } from 'react-redux';
+import { getAllDndSessions } from '../../store/randomSession';
+import { useDispatch, useSelector } from 'react-redux';
+import SessionCard from '../SessionCard';
 import './Landing.css';
 
 function Landing({ nav }) {
   nav();
+  const dispatch = useDispatch();
+  const allSessions = useSelector(state => state.allSessions);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    dispatch(getAllDndSessions());
+  }, [])
 
   return (
     <div className='LandingPage'>
@@ -25,9 +34,23 @@ function Landing({ nav }) {
         </div>
       </div>
       <div className='LandingExploreNearby'>
-
+        <div className='NearYouTitle'>
+          <h2>Explore some sessions near you!</h2>
+        </div>
+        <div className='AllSessions'>
+          {Object.keys(allSessions).map((sessionId) => {
+            return (
+              <NavLink key={sessionId} to={`/sessions/${sessionId}`}>
+                <div
+                  className="SessionMap"
+                  style={{ backgroundImage: `url('${allSessions[sessionId]?.map}')` }}
+                ></div>
+              </NavLink>
+            );
+          })}
+        </div>
       </div>
-      <div className='LandingHostAnywhere'>
+      {/* <div className='LandingHostAnywhere'>
 
       </div>
       <div className='LandingTryHosting'>
@@ -47,7 +70,7 @@ function Landing({ nav }) {
       </div>
       <div className='LandingFooter'>
 
-      </div>
+      </div> */}
     </div>
   );
 }

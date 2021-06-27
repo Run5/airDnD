@@ -13,6 +13,7 @@ function Profile(){
   const [showForm, setShowForm] = useState(false);
   const [showEditForm, setShowEditForm] = useState(false);
   const [characterId, setCharacterId] = useState(0);
+  const [buttonDisabled, setButtonDisabled] = useState(false);
   const sessionUser = useSelector(state => state.session.user);
   const myCharacters = useSelector(state => state.characters);
 
@@ -26,48 +27,60 @@ function Profile(){
   }, [dispatch])
 
   return (
-    <>
-      <div>
-        <h1>{sessionUser?.username}</h1>
+    <div className='ProfileContainer'>
+      <div className='ProfileTitle'>
+        <h1>Hello {sessionUser?.username}</h1>
         <p>Here is your profile Page!</p>
+        <div>
+          <Fab hidden={showForm || buttonDisabled} onClick={() => {
+            setButtonDisabled(true)
+            setShowForm(true)
+          }} />
+        </div>
       </div>
       <div>
         {(!isEmpty(myCharacters)) ?
-          <div>
+          <div className='YourCharactersContainer'>
             <h2>Your Characters</h2>
             { Object.keys(myCharacters).map((charId) => {
               if(myCharacters[charId]?.user_id === sessionUser?.id) {
                 return (
-                  <div>
+                  <div className='CharacterWrapper'>
+                    <div className='CharWrap'>
                     {/* <NavLink to={``}></NavLink> eventually can link to character details page here*/}
-                    <div>{myCharacters[charId]?.name}</div>
-                    <div>{myCharacters[charId]?.race}</div>
-                    <div>{myCharacters[charId]?.class}</div>
-                    <div>{myCharacters[charId]?.level}</div>
-                    <button type="button" onClick={(e) => {
-                      e.preventDefault();
-                      setCharacterId(charId);
-                      setShowEditForm(true)
-                    }}>edit</button>
-                    <button type="button" onClick={(e) => {
-                      e.preventDefault();
-                      dispatch(deleteCharacter(charId));
-                    }}>delete</button>
+                      <div className='CharacterInfo'>{myCharacters[charId]?.name}</div>
+                      <div className='CharacterInfo'>{myCharacters[charId]?.race}</div>
+                      <div className='CharacterInfo'>{myCharacters[charId]?.class}</div>
+                      <div className='CharacterInfo'>{myCharacters[charId]?.level}</div>
+                    </div>
+                    <div className='BtnWrap'>
+                      <button type="button" className='CharacterButton' disabled={buttonDisabled} onClick={(e) => {
+                        e.preventDefault();
+                        setCharacterId(charId);
+                        setShowEditForm(true)
+                        setButtonDisabled(true);
+                      }}>Edit</button>
+                      <button type="button" className='CharacterButton' disabled={buttonDisabled} onClick={(e) => {
+                        e.preventDefault();
+                        dispatch(deleteCharacter(charId));
+                      }}>Delete</button>
+                    </div>
                   </div>
                 )
               }//endIf
             }) }
           </div> : null
         }
-        { showEditForm ? <EditCharacter hideForm={ () => setShowEditForm(false) } charId={ characterId } /> : null }
+        { showForm ? <CreateCharacter hideForm={ () => {
+            setButtonDisabled(false)
+            setShowForm(false)
+          }} /> : null }
+        { showEditForm ? <EditCharacter hideForm={ () => {
+            setButtonDisabled(false)
+            setShowEditForm(false)
+          }} charId={ characterId } /> : null }
       </div>
-      <div>
-        <Fab hidden={showForm} onClick={() => setShowForm(true)} />
-        { showForm ? (
-          <CreateCharacter hideForm={ () => setShowForm(false) } />
-        ) : null }
-      </div>
-    </>
+    </div>
   );
 }
 

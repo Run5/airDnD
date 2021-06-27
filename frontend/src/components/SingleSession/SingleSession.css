@@ -2,6 +2,7 @@
 
 body {
   background-color: var(--brightBlue);
+  margin-top: 80px;
 }
 
 .SingleSessionContainer {
@@ -44,6 +45,24 @@ body {
 
 .SingleSessionName {
 
+}
+
+.SessionIsFull {
+  width: 200px;
+  height: 40px;
+  font-size: 1em;
+  border-radius: 8px;
+  margin: 0 auto;
+  background-color: #e25f6a;
+  color: white;
+  border: 2px solid #e25f6a;
+  font-weight: bold;
+  position: absolute;
+  bottom: 25px;
+  right: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .HostingFormActualButton,
@@ -105,12 +124,50 @@ body {
   /* top: 530px; */
   height: 100%;
   width: 50%;
-  padding: 20px;
+  padding: 0 20px;
   background-color: var(--darkBlue);
   color: white;
   margin-bottom: 5px;
+  /* box-sizing: border-box; */
 }
 
 .MyCharacters {
-  height: 100px;
+  height: 100%;
+}
+
+.CharContainerJoin {
+  display: flex;
+  justify-content: space-between;
+}
+
+.CharJoinButton,
+.CharCancelButton {
+  width: 110px;
+  height: 40px;
+  font-size: 1em;
+  border-radius: 8px;
+  background-color: #e25f6a;
+  color: white;
+  border: 2px solid #e25f6a;
+  font-weight: bold;
+  margin: 5px;
+}
+
+.CharCancelButton {
+  width: 100%;
+}
+
+.CharJoinButton:hover,
+.CharCancelButton:hover {
+  transition: all 0.4s ease 0s;
+  color: #e25f6a;
+  background-color: white;
+  cursor: pointer;
+}
+
+.CharInfoJoin {
+  margin-left: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

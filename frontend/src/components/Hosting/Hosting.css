@@ -1,7 +1,11 @@
 @import "../styles.css";
 
-.HostingPage {
+body {
+  margin-top: 0;
+}
 
+.HostingPage {
+  margin-top: -80px;
 }
 
 .HostingPageHeaderContainer,
