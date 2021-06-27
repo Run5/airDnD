@@ -31,8 +31,8 @@ function SingleSession({ nav }) {
   }
 
   useEffect(async () => {
-    await dispatch(getDndSingleSession(sessionId));
-    await dispatch(getPartyBySession(sessionId));
+    if(sessionId) await dispatch(getDndSingleSession(sessionId));
+    if(sessionId) await dispatch(getPartyBySession(sessionId));
     if (sessionUser) await dispatch(getCharacters(sessionUser?.id));
   }, [dispatch, partyIsFull, isInParty, mySlot, showCharacters])
 

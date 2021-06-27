@@ -1,6 +1,5 @@
 // frontend/src/components/Profile/index.js
 import React, { useState, useEffect } from "react";
-// import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Fab from "./Fab";
 import CreateCharacter from "./CreateCharacter";
