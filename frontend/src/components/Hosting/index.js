@@ -28,6 +28,10 @@ function Hosting({ nav }) {
     return Object.keys(obj).length === 0;
   }
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   useEffect(async () => {
 
     if(!isEmpty(dndSessions)) setUserIsHost(true);

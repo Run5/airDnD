@@ -12,9 +12,12 @@ function Landing({ nav }) {
   const allSessions = useSelector(state => state.allSessions);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-    dispatch(getAllDndSessions());
+    window.scrollTo(0, 0)
   }, [])
+
+  useEffect(() => {
+    dispatch(getAllDndSessions());
+  }, [dispatch])
 
   return (
     <div className='LandingPage'>

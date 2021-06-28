@@ -30,6 +30,10 @@ function SingleSession({ nav }) {
     return Object.keys(obj).length === 0;
   }
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   useEffect(async () => {
     if(sessionId) await dispatch(getDndSingleSession(sessionId));
     if(sessionId) await dispatch(getPartyBySession(sessionId));
