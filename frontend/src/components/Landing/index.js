@@ -30,9 +30,9 @@ function Landing({ nav }) {
             <div className='LandingBannerSubtitle'>
               Wishlists curated by Airdnd.
             </div>
-            <button className='LandingBannerButton'>
-              Get inspired
-            </button>
+            <NavLink className='LandingBannerButton' to='/host'>
+              Get Inspired
+            </NavLink>
           </div>
         </div>
       </div>

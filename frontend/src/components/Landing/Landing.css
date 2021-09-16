@@ -53,7 +53,8 @@ body {
   font-weight: 500;
   background-color: white;
   color: var(--darkBlue);
-  border: 2px solid var(--darkBlue)
+  border: 2px solid var(--darkBlue);
+  text-decoration: none;
 }
 
 .LandingExploreNearby {

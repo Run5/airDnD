@@ -28,14 +28,14 @@ function Navigation({ isLoaded, nav }){
         <div className='NavHome'>
           <NavLink exact to='/'>{d20} airdnd</NavLink>
         </div>
-        <div className='NavSearchBar'>
+        {/* <div className='NavSearchBar'>
           <div className='NavSearch'>
             Start your search
           </div>
           <button type='button' className='NavSearchButton'>
             {searchIcon}
           </button>
-        </div>
+        </div> */}
         <div className='NavRightContainer'>
           <div className='NavBecomeHost'>
             <NavLink className='NavHostButton' to='/host'>
