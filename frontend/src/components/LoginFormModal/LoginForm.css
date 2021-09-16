@@ -68,6 +68,7 @@
 .LoginFormSignup {
   width: 90%;
   margin: 10px auto;
+  display: flex;
 }
 
 .LoginFormSignup > a {

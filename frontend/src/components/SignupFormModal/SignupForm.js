@@ -5,6 +5,7 @@ import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import { fbSquare, gpSquare, twSquare, userIcon, keyIcon, emailSquare, lockIcon, errIcon } from '../icons';
 import './SignupForm.css';
+import LoginFormModal from "../LoginFormModal";
 
 function SignupForm({ setShowMenu }) {
   const dispatch = useDispatch();
@@ -101,13 +102,13 @@ function SignupForm({ setShowMenu }) {
       </form>
       <div className='SignupFormSignup'>
         Already have an account?&ensp;
-        <a>Log In</a>
+        <LoginFormModal setShowMenu={ setShowMenu }/>
       </div>
-      <div className='SignupFormIcons'>
+      {/* <div className='SignupFormIcons'>
         <div className='SignupFormIcon'>{fbSquare}</div>
         <div className='SignupFormIcon'>{gpSquare}</div>
         <div className='SignupFormIcon'>{twSquare}</div>
-      </div>
+      </div> */}
     </div>
   );
 }

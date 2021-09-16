@@ -4,12 +4,12 @@ import { Modal } from '../../context/Modal';
 import HostingForm from './HostingForm';
 import './HostingForm.css';
 
-function HostingFormModal({ btnTxt }) {
+function HostingFormModal({ btnTxt, cName }) {
   const [showModal, setShowModal] = useState(false);
 
   return (
     <>
-      <button className='HostingFormActualButton' onClick={() => setShowModal(true)}>{btnTxt}</button>
+      <button className={`${cName}`} onClick={() => setShowModal(true)}>{btnTxt}</button>
       {showModal && (
         <Modal
           onClose={() => setShowModal(false)}

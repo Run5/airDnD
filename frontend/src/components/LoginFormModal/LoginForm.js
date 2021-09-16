@@ -4,6 +4,7 @@ import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
 import { fbSquare, gpSquare, twSquare, userIcon, keyIcon, errIcon } from '../icons';
 import './LoginForm.css';
+import SignupFormModal from "../SignupFormModal";
 
 
 function LoginForm({ setShowMenu }) {
@@ -75,7 +76,7 @@ function LoginForm({ setShowMenu }) {
       </form>
       <div className='LoginFormSignup'>
         Don't have an account?&ensp;
-        <a>Sign Up</a>
+        <SignupFormModal setShowMenu={ setShowMenu }/>
       </div>
       {/* <div className='LoginFormIcons'>
         <div className='LoginFormIcon'>{fbSquare}</div>

@@ -65,7 +65,7 @@ function Hosting({ nav }) {
           </NavLink>
         </div>
         <div className='HostingFormButton'>
-          <HostingFormModal btnTxt={"Try Hosting"} />
+          <HostingFormModal btnTxt={"Try Hosting"} cName={'HostingFormActualButton'}/>
         </div>
       </div>
       {/* <div className='HostingPageHostAnything'>
@@ -109,7 +109,7 @@ function Hosting({ nav }) {
           </div>
         </div>
         <div className='HostingFormButton'>
-          <HostingFormModal btnTxt={"Let's go!"} setShowSessions={() => setUserIsHost(true)} />
+          <HostingFormModal btnTxt={"Let's go!"} cName={'HostingFormActualButton'} setShowSessions={() => setUserIsHost(true)} />
         </div>
       </div>
       <div className='HostingPageActualFooter'>

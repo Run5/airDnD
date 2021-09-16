@@ -122,12 +122,16 @@
   align-items: center;
 }
 
+.profile-dropdown div{
+  margin-top: 15px;
+}
+
 .hidden {
   display: none;
 }
 
 .LogoutButton {
-  width: 80px;
+  width: 80%;
   height: 40px;
   font-size: 1em;
   border-radius: 8px;
@@ -136,9 +140,18 @@
   color: white;
   border: 2px solid #e25f6a;
   font-weight: bold;
-  position: absolute;
-  bottom: 25px;
-  right: 135px;
+}
+
+.menuHostingFormButton {
+  width: 80%;
+  height: 40px;
+  font-size: 1em;
+  border-radius: 8px;
+  margin: 0 auto;
+  background-color: #e25f6a;
+  color: white;
+  border: 2px solid #e25f6a;
+  font-weight: bold;
 }
 
 .LogoutButton:hover {
